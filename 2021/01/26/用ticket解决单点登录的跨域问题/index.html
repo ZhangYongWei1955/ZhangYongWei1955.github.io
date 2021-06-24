@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://yongwei19.github.io/2021/01/26/用ticket解决单点登录的跨域问题/1611667302(1).jpg">
 <meta property="og:image" content="https://yongwei19.github.io/2021/01/26/用ticket解决单点登录的跨域问题/1611667945(1).jpg">
 <meta property="og:image" content="https://yongwei19.github.io/2021/01/26/用ticket解决单点登录的跨域问题/1611668279(1).jpg">
-<meta property="og:updated_time" content="2021-06-24T09:10:11.835Z">
+<meta property="og:updated_time" content="2021-06-24T09:21:45.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用ticket解决单点登录的跨域问题">
 <meta name="twitter:description" content="ios14 默认关闭应用的 「允许跨站跟踪」的权限微信浏览器没有提供 safari 和 chrome 等主流浏览器提供用户操作关闭「阻止跨网站跟踪」的功能">
@@ -207,18 +207,8 @@
         <p>ios14 默认关闭应用的 <strong>「允许跨站跟踪」</strong>的权限<br>微信浏览器没有提供 safari 和 chrome 等主流浏览器提供用户操作关闭<strong>「阻止跨网站跟踪」</strong>的功能</p>
 <a id="more"></a>
 
-<h3 id="一、什么是跨域？"><a href="#一、什么是跨域？" class="headerlink" title="一、什么是跨域？"></a>一、什么是跨域？</h3><p><strong>1、为什么会有跨域？其实是出于浏览器的同源策略限制</strong></p>
-<ul>
-<li>出于浏览器的同源策略/SOP（Same origin policy）限制</li>
-<li>同源策略是一种约定，它是浏览器最核心也最基本的安全功能</li>
-<li>Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现</li>
-<li>如果缺少了同源策略，浏览器很容易受到 XSS、CSRF 等攻击</li>
-</ul>
-<p><strong>2、什么是跨域？</strong><br>    源：协议、域名、端口</p>
-<ul>
-<li>同源就是两个页面具有相同的 协议(protocol)、主机(host)和端口号(port)</li>
-<li>当一个请求url的<strong>协议、域名、端口</strong>三者之间任意一个与当前页面url不同即为跨域<br>例如下表的A调用B：</li>
-</ul>
+<h3 id="一、什么是跨域？"><a href="#一、什么是跨域？" class="headerlink" title="一、什么是跨域？"></a>一、什么是跨域？</h3><p><strong>为什么会有跨域？其实是出于浏览器的同源策略限制</strong><br>    1. 出于浏览器的同源策略/SOP（Same origin policy）限制<br>    2. 同源策略是一种约定，它是浏览器最核心也最基本的安全功能<br>    3. Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现<br>    4. 如果缺少了同源策略，浏览器很容易受到 XSS、CSRF 等攻击</p>
+<p><strong>什么是跨域？</strong><br>    源：协议、域名、端口<br>        1、同源就是两个页面具有相同的 协议(protocol)、主机(host)和端口号(port)<br>        2、当一个请求url的<strong>协议、域名、端口</strong>三者之间任意一个与当前页面url不同即为跨域<br>例如下表的A调用B：</p>
 <table>
 <thead>
 <tr>
@@ -264,25 +254,9 @@
 <li>nodejs中间件代理跨</li>
 <li>WebSocket协议跨域</li>
 </ol>
-<h3 id="三、我们业务遇到的跨域问题"><a href="#三、我们业务遇到的跨域问题" class="headerlink" title="三、我们业务遇到的跨域问题"></a>三、我们业务遇到的跨域问题</h3><p><strong>问题背景：</strong></p>
-<ol>
-<li>ios14 默认关闭应用的 <strong>「允许跨站跟踪」</strong>的权限</li>
-<li>而且微信浏览器没有提供 safari 和 chrome 等主流浏览器提供用户操作关闭<strong>「阻止跨网站跟踪」</strong>的功能。导致 ios14 的用户使用微信浏览器无法登录我们业务<br><img src="/2021/01/26/用ticket解决单点登录的跨域问题/1611667302(1).jpg" alt="1611667302(1)"></li>
-</ol>
-<p><strong>我们业务此前的登录流程：</strong></p>
-<ol>
-<li>用户使用账号密码登录，登录成功后 登录平台 将用户 cookie 到 <strong>.abc.com</strong> 域名下</li>
-<li>统一登录 redirect 到业务的 <strong>x.xyz.cn</strong></li>
-<li>但由于跨站跟踪的限制，业务的 x<strong>.xyz.cn</strong> 无法从 <strong>.abc.com</strong>下拿到用户 cookie (一级域名、二级域名均不同)</li>
-<li>最终导致在 jsonp 去校验登录状态(checkLogin) 时，不能用 token 去跟统一登录后台换取 userInfo，登录校验不通过 x.xyz.cn 会⼀值停留在 redirect ⻚⾯<br><img src="/2021/01/26/用ticket解决单点登录的跨域问题/1611667945(1).jpg" alt="1611667945(1)"></li>
-</ol>
-<p>为什么其它业务不出现上述情况？以 B 业务为例，看他们的登录方式：</p>
-<ol>
-<li>用户使用账号密码登录B，登录成功后 统一登录 将用户 cookieset 到 <strong>.abc.com</strong> 域名下</li>
-<li>统一登录 redirect 到 <strong>B.abc.com</strong> 域名下</li>
-<li>由于 B 与统一登录之间的 一级域名、二级域名均相同，B.abc.com 可以直接从 abc.com 下获取用户token</li>
-<li>最后通过 jsonp 去校验登录状态，用 token 去跟统一登录后台换取 userInfo </li>
-</ol>
+<h3 id="三、我们业务遇到的跨域问题"><a href="#三、我们业务遇到的跨域问题" class="headerlink" title="三、我们业务遇到的跨域问题"></a>三、我们业务遇到的跨域问题</h3><p><strong>问题背景：</strong><br>    1. ios14 默认关闭应用的 <strong>「允许跨站跟踪」</strong>的权限<br>    2. 而且微信浏览器没有提供 safari 和 chrome 等主流浏览器提供用户操作关闭<strong>「阻止跨网站跟踪」</strong>的功能。导致 ios14 的用户使用微信浏览器无法登录我们业务<br><img src="/2021/01/26/用ticket解决单点登录的跨域问题/1611667302(1).jpg" alt="1611667302(1)"></p>
+<p><strong>我们业务此前的登录流程：</strong><br>    1. 用户使用账号密码登录，登录成功后 登录平台 将用户 cookie 到 <strong>.abc.com</strong> 域名下<br>    2. 统一登录 redirect 到业务的 <strong>x.xyz.cn</strong><br>    3. 但由于跨站跟踪的限制，业务的 x<strong>.xyz.cn</strong> 无法从 <strong>.abc.com</strong>下拿到用户 cookie (一级域名、二级域名均不同)<br>    4. 最终导致在 jsonp 去校验登录状态(checkLogin) 时，不能用 token 去跟统一登录后台换取 userInfo，登录校验不通过 x.xyz.cn 会⼀值停留在 redirect ⻚⾯<br><img src="/2021/01/26/用ticket解决单点登录的跨域问题/1611667945(1).jpg" alt="1611667945(1)"></p>
+<p>为什么其它业务不出现上述情况？以 B 业务为例，看他们的登录方式：<br>    1. 用户使用账号密码登录B，登录成功后 统一登录 将用户 cookieset 到 <strong>.abc.com</strong> 域名下<br>    2. 统一登录 redirect 到 <strong>B.abc.com</strong> 域名下<br>    3. 由于 B 与统一登录之间的 一级域名、二级域名均相同，B.abc.com 可以直接从 abc.com 下获取用户token<br>    4. 最后通过 jsonp 去校验登录状态，用 token 去跟统一登录后台换取 userInfo </p>
 <h3 id="四、跨域问题解决方案"><a href="#四、跨域问题解决方案" class="headerlink" title="四、跨域问题解决方案"></a>四、跨域问题解决方案</h3><p><strong>方案一：</strong><br>​    方案：将我们业务的顶级域名 从 <strong>.cn</strong> 换成 <strong>.com</strong>、将二级域名 <strong>.xyz</strong> 换成 <strong>.abc</strong><br>​    优点：线上问题快速修复、解决跨域的根本问题<br>​    问题：需要申请新域名、业务i在各处的备案信息均需要修改<br>​    结果：产品经理、项目负责人等均否决此方案</p>
 <p><strong>方案二(最终实现的方案)：</strong><br>​    <strong>基本思路：</strong>业务不直接从 <strong>.abc.com</strong> 域名下获取用户token，而是通过 调接口的方式 去获取用户token<br>​    <strong>实现流程：</strong><br><img src="/2021/01/26/用ticket解决单点登录的跨域问题/1611668279(1).jpg" alt="1611668279(1)"></p>
 <ol>
@@ -293,15 +267,7 @@
 <li>业务前端在拿到用户 token 后，再去获取 userInfo (调用平台 server )</li>
 <li>业务前端重定向到业务的页面(redirect_url)，把 userInfo 设置 cookie 到 browser 中</li>
 </ol>
-<p><strong>具体实现：</strong></p>
-<ol>
-<li>业务前端拼接登录地址：<br>登录域名+ ?<strong>withticket=true</strong>&amp;redirect_url= + redirect 中继页 + 页面重定向 url<ul>
-<li><strong>withticket=true：</strong>告知统一登录业务将采用 ticket 的登录方式</li>
-<li><strong>redirect 中继页：<code>https://study.seewoedu.cn/redirect</code> 用于截获 ticket 获取 token</strong></li>
-</ul>
-</li>
-<li>redirect 中继页中，有一个 <strong>redict controller</strong>，controller 将根据 ticket 去获取 token 、用 token 获取userInfo、set cookie</li>
-</ol>
+<p><strong>具体实现：</strong><br>    1.业务前端拼接登录地址：登录域名+ ?<strong>withticket=true</strong>&amp;redirect_url= + redirect 中继页 + 页面重定向 url<br>        <strong>withticket=true：</strong>告知统一登录业务将采用 ticket 的登录方式<br>        <strong>redirect 中继页：<code>https://study.seewoedu.cn/redirect</code> 用于截获 ticket 获取 token</strong><br>    2.redirect 中继页中，有一个 <strong>redict controller</strong>，controller 将根据 ticket 去获取 token 、用 token 获取userInfo、set cookie</p>
 
       
 
