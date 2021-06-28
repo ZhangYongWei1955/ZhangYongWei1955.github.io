@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
-  <title>Tag: 《软件测试》 | yongwei&#39;s blogs</title>
+  <title>MySQL--测试人员要了解的测试点 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录个人笔记">
-<meta name="keywords" content="个人笔记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yongwei&#39;s blogs">
-<meta property="og:url" content="https://yongwei19.github.io/tags/《软件测试》/index.html">
+  <meta name="description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
+<meta name="keywords" content="顾问培训,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL--测试人员要了解的测试点">
+<meta property="og:url" content="https://yongwei19.github.io/61694c2.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="记录个人笔记">
+<meta property="og:description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-06-28T13:02:15.839Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yongwei&#39;s blogs">
-<meta name="twitter:description" content="记录个人笔记">
+<meta name="twitter:title" content="MySQL--测试人员要了解的测试点">
+<meta name="twitter:description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -171,71 +172,200 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-MySQL--测试人员要了解的测试点" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/41c3a9fb.html" class="archive-article-date">
-  	<time datetime="2019-09-28T08:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/41c3a9fb.html">《软件测试》读书笔记</a>
+    <h1 class="article-title" itemprop="name">
+      MySQL--测试人员要了解的测试点
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/61694c2.html" class="archive-article-date">
+  	<time datetime="2021-06-28T11:07:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-28</time>
+</a>
+        
+
+        <!-- 添加不蒜子统计文章访问量 -->
+      
+        <span class="archive-article-date">
+          阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
+      
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的<strong>测试点</strong>：</p>
+<a id="more"></a>
+
+<p>1、<strong>表字段是否多余</strong></p>
+<p>2、<strong>表字段长度是否合适</strong><br>　① 布尔和枚举建议 tiny<br>　② 日期和时间戳：timestamp 或 int<br>　③ 字符类型：char，text，blob 等建议经量使用符合长度的 varchar(n)<br>　④ 小数和货币：移位转为int或者 decimal<br>　⑤ 小数和货币：移位转为int或者 decimal<br>　⑥ ip 地址：int</p>
+<p>3、<strong>表字段是否需要加密</strong></p>
+<p>4、<strong>表是否需要创建对应索引</strong><br>　① 索引字段的顺序考虑字段的选择性，选择性高的放前面(选择性高：字段不重复)<br>　② 合理使用联合索引，避免多个冗余的单个索<br>　③ 合理利用覆盖索引</p>
+<p>5、<strong>sql 是否能命中合适的索引</strong><br>　如果没有能力静态分析，就依靠线下 sql 分析工具，或者手工做参数替换后拿到线上去做 explain，重点关注 type 和 extra 字段</p>
+<p>6、sql 查询是否只查需要的字段，<strong>禁止select *</strong></p>
+<p>7、sql 未来的增速预估及性能保证方案是否有考虑，比如：<br>　① 垂直拆分：按业务将表拆分到不同的库<br>　② 水平拆分：分表分库<br>　③ <strong>读写分离</strong>：在业务允许的情况下，在从库中读取非实时数据<br>　④ 定时归档<br>　⑤ 缩小查询范围：时间或者业务范围</p>
+<p>8、不建议 sql 使用子查询</p>
+<p>9、不建议 sql 中 join 超过3张表</p>
+<p>10、<strong>模糊查询%要加在后面</strong></p>
+<p>11、模糊查询很多的场景，是否使用 ES 更合理？</p>
+<p>12、注意隐式类型转换的危害</p>
+<p>13、尽量<strong>不在 sql 中做数学运算，函数计算</strong>等</p>
+<p>14、group by 时会默认排序，如果业务没必要排序，建议加 order by null</p>
+<p>15、<strong>禁止使用存储过程，函数、触发器、外键约束</strong></p>
+<p>16、sql 的超时是否需要设置 (一般是100mm，mybatis 设置/数据库连接池)</p>
+<p>17、能不使用事务的，就不要使用事务，优先使用其它方式保证数据一致性</p>
+<p>18、事务的跨度要尽量小</p>
+<p>19、分表分库涉及时，要考虑到<strong>数据分布均匀，避免单库 或 单表数据倾斜</strong></p>
+<p>　<em>上述均为平时工作时的总结，如有错误，望指出</em></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">《软件测试》</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">顾问培训</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/读书笔记//" class="article-tag-list-link color5">读书笔记</a>
+        			<a href="/categories/工作记录//" class="article-tag-list-link color5">工作记录</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yongwei19.github.io/61694c2.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/439a16d.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Redis--测试人员要了解的测试点
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/43902f53.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Web安全基础</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -275,9 +405,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
