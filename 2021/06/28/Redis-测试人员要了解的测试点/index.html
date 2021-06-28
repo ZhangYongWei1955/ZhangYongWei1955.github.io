@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
   <title>Redis--测试人员要了解的测试点 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Redis 是一个 key-value 存储系统，它适合放一些频繁使用，比较热的数据。我们都知道 mysql 存储在磁盘里，redis 存储在内存里，redis 既可以用来做持久存储，也可以做缓存，而目前大多数公司的存储都是 mysql + redis，mysql 作为主存储，redis 作为辅助存储被用作缓存，加快访问读取的速度，提高性能。我们的项目中就大量使用了 redis，因此对 redis">
+  <meta name="description" content="Redis 是一个 key-value 存储系统，它适合放一些频繁使用，比较热的数据。我们都知道 mysql 存储在磁盘里，redis 存储在内存里，redis 既可以用来做持久存储，也可以做缓存，而目前大多数公司的存储都是 mysql + redis，mysql 作为主存储，redis 作为辅助存储被用作缓存，加快访问读取的速度，提高性能。 我们的项目中就大量使用了 redis，因此对 redi">
 <meta name="keywords" content="顾问培训,Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis--测试人员要了解的测试点">
 <meta property="og:url" content="https://yongwei19.github.io/2021/06/28/Redis-测试人员要了解的测试点/index.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="Redis 是一个 key-value 存储系统，它适合放一些频繁使用，比较热的数据。我们都知道 mysql 存储在磁盘里，redis 存储在内存里，redis 既可以用来做持久存储，也可以做缓存，而目前大多数公司的存储都是 mysql + redis，mysql 作为主存储，redis 作为辅助存储被用作缓存，加快访问读取的速度，提高性能。我们的项目中就大量使用了 redis，因此对 redis">
+<meta property="og:description" content="Redis 是一个 key-value 存储系统，它适合放一些频繁使用，比较热的数据。我们都知道 mysql 存储在磁盘里，redis 存储在内存里，redis 既可以用来做持久存储，也可以做缓存，而目前大多数公司的存储都是 mysql + redis，mysql 作为主存储，redis 作为辅助存储被用作缓存，加快访问读取的速度，提高性能。 我们的项目中就大量使用了 redis，因此对 redi">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-06-28T12:07:54.160Z">
+<meta property="og:updated_time" content="2021-06-28T12:10:14.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis--测试人员要了解的测试点">
-<meta name="twitter:description" content="Redis 是一个 key-value 存储系统，它适合放一些频繁使用，比较热的数据。我们都知道 mysql 存储在磁盘里，redis 存储在内存里，redis 既可以用来做持久存储，也可以做缓存，而目前大多数公司的存储都是 mysql + redis，mysql 作为主存储，redis 作为辅助存储被用作缓存，加快访问读取的速度，提高性能。我们的项目中就大量使用了 redis，因此对 redis">
+<meta name="twitter:description" content="Redis 是一个 key-value 存储系统，它适合放一些频繁使用，比较热的数据。我们都知道 mysql 存储在磁盘里，redis 存储在内存里，redis 既可以用来做持久存储，也可以做缓存，而目前大多数公司的存储都是 mysql + redis，mysql 作为主存储，redis 作为辅助存储被用作缓存，加快访问读取的速度，提高性能。 我们的项目中就大量使用了 redis，因此对 redi">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -200,7 +200,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Redis 是一个 key-value 存储系统，它适合放一些频繁使用，比较热的数据。我们都知道 mysql 存储在磁盘里，redis 存储在内存里，redis 既可以用来做持久存储，也可以做缓存，而目前大多数公司的存储都是 mysql + redis，mysql 作为主存储，redis 作为辅助存储被用作缓存，加快访问读取的速度，提高性能。<br>我们的项目中就大量使用了 redis，因此对 redis 的验证是必不可少的，以下是在对 redis 验证时总结的一些<strong>测试点：</strong></p>
+        <p>Redis 是一个 key-value 存储系统，它适合放一些频繁使用，比较热的数据。我们都知道 mysql 存储在磁盘里，redis 存储在内存里，redis 既可以用来做持久存储，也可以做缓存，而目前大多数公司的存储都是 mysql + redis，mysql 作为主存储，redis 作为辅助存储被用作缓存，加快访问读取的速度，提高性能。</p>
+<p>我们的项目中就大量使用了 redis，因此对 redis 的验证是必不可少的，以下是在对 redis 验证时总结的一些<strong>测试点：</strong></p>
 <a id="more"></a>
 
 <h5 id="1、大key-风险：某个key所存储的内容很大，比如一个key存了1M的内容"><a href="#1、大key-风险：某个key所存储的内容很大，比如一个key存了1M的内容" class="headerlink" title="1、大key 风险：某个key所存储的内容很大，比如一个key存了1M的内容"></a>1、<strong>大key 风险：</strong>某个key所存储的内容很大，比如一个key存了1M的内容</h5><p>　风险：<strong>单个 size 太大，并发高容易把 redis 带宽打满</strong><br>　应对：把缓存内容做行列拆分，比如，一个缓存原来按游戏类别存储了该类别下所有游戏名称以及开发商信息，单个 key 大于1M；我们可以把他们拆成按游戏列别+开发商唯独的缓存，每次根据游戏类别+开发商信息来取游戏名称</p>
@@ -478,11 +479,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AB测试</a>
+                <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
+                <a href="javascript:void(0)" class="js-tag color5">AB测试</a>
               </li>
              
               <li class="article-tag-list-item">
