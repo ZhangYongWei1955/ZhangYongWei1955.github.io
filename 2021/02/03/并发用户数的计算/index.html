@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://yongwei19.github.io/2021/02/03/并发用户数的计算/1612527476(1).jpg">
 <meta property="og:image" content="https://yongwei19.github.io/2021/02/03/并发用户数的计算/1612527926(1).jpg">
 <meta property="og:image" content="https://yongwei19.github.io/2021/02/03/并发用户数的计算/1612529647(1).jpg">
-<meta property="og:updated_time" content="2021-06-17T11:41:08.728Z">
+<meta property="og:updated_time" content="2021-06-28T11:28:19.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发用户数的计算">
 <meta name="twitter:description" content="不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了">
@@ -79,7 +79,7 @@
 		</nav>
 
 		<nav>
-			总文章数 7
+			总文章数 8
 		</nav>
 
 		<nav class="header-smart-menu">
@@ -211,41 +211,18 @@
 <a id="more"></a>
 
 <p>绝对并发指的是同一时刻的并发数；相对并发指的是一个时间段内发生的事情</p>
-<h4 id="什么是并发？"><a href="#什么是并发？" class="headerlink" title="什么是并发？"></a>什么是并发？</h4><p><img src="/2021/02/03/并发用户数的计算/1612526703(1).jpg" alt="1612526703(1)"><br>假设上图中的这些小人是严格按照这个逻辑到达系统的，那显然，系统的绝对并发用户数是 4。如果描述 1 秒内的并发用户数，那就是 16</p>
-<p>但是，在实际的系统中，用户通常是这样分配的：<br><img src="/2021/02/03/并发用户数的计算/1612526866(1).jpg" alt="1612526866(1)"><br>用户会分布在系统中不同的服务、网络等对象中，”绝对并发“的概念就很难描述了<br>这时建议用 TPS 来承载“并发”这个概念，并发数是 16TPS，就是 1 秒内整个系统处理了 16 个事务</p>
-<h4 id="在线用户数、并发用户数怎么计算"><a href="#在线用户数、并发用户数怎么计算" class="headerlink" title="在线用户数、并发用户数怎么计算"></a>在线用户数、并发用户数怎么计算</h4><p><img src="/2021/02/03/并发用户数的计算/1612527394(1).jpg" alt="1612527394(1)"><br>如上图所示，总共有 32 个用户进入了系统，但是绿色的用户并没有任何动作，那么显然，在线用户数是 32 个，并发用户数是 16 个，这时的并发度就是 50%<br>但是在系统中，往往是这样的：<br><img src="/2021/02/03/并发用户数的计算/1612527476(1).jpg" alt="1612527476(1)"><br>为了能 hold 住更多的用户，通常都会把一些数据放到 Redis 这样的缓存服务器中。所以在线用户数怎么算呢，如果仅从上面这种简单的图来看的话，其实就是缓存服务器能有多大，能 hold 住多少用户需要的数据<br>假设一个用户进入系统之后，需要用 10k 内存来维护一个用户的信息，那么 10G 的内存就能 hold 住 1,048,576 个用户的数据，这就是<strong>最大在线用户数</strong>了<br>但并发用户数不同，他们需要在系统中执行某个动作。我们要测试的重中之重，就是统计这些正在执行动作的并发用户数。当我们统计生产环境中的在线用户数时，并发用户数也是要同时统计的。这里会涉及到一个概念：<strong>并发度</strong><br><img src="/2021/02/03/并发用户数的计算/1612527926(1).jpg" alt="1612527926(1)"><br>通过这个图，我们可以看到一个简单的计算逻辑：</p>
-<ol>
-<li>如果有 10000 个在线用户数，同时并发度是 1%，那显然并发用户数就是 100</li>
-<li>如果每个线程的 20TPS，显然只需要 5 个线程就够了（这里说的线程指的是压力机的线程数）</li>
-<li>这时对 Server 来说，它处理的就是 100TPS，平均响应时间是 50ms (50ms = (1s/20TPS * 5)/5)</li>
-<li>如果我们有两个 Server 线程来处理，那么一个线程就是 50TPS</li>
-<li>有一个转换的细节，那就是<strong>并发用户数到压力机的并发线程数</strong><br>而我们通常说的“并发”这个词，依赖 TPS 来承载的时候，指的都是 Server 端的处理能力，并不是压力工具上的并发线程数。在上面的例子中，我们说的并发就是指服务器上 100TPS 的处理能力，而不是指 5 个压力机的并发线程数</li>
-</ol>
-<p><strong>不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了</strong></p>
+<h4 id="什么是并发？"><a href="#什么是并发？" class="headerlink" title="什么是并发？"></a>什么是并发？</h4><p><img src="/2021/02/03/并发用户数的计算/1612526703(1).jpg" alt="1612526703(1)"><br>假设上图中的这些小人是严格按照这个逻辑到达系统的，那显然，系统的绝对并发用户数是 4。如果描述 1 秒内的并发用户数，那就是 16<br>但是，在实际的系统中，用户通常是这样分配的：<br><img src="/2021/02/03/并发用户数的计算/1612526866(1).jpg" alt="1612526866(1)"><br>用户会分布在系统中不同的服务、网络等对象中，”绝对并发“的概念就很难描述了<br>这时建议用 TPS 来承载“并发”这个概念，并发数是 16TPS，就是 1 秒内整个系统处理了 16 个事务</p>
+<h4 id="在线用户数、并发用户数怎么计算"><a href="#在线用户数、并发用户数怎么计算" class="headerlink" title="在线用户数、并发用户数怎么计算"></a>在线用户数、并发用户数怎么计算</h4><p><img src="/2021/02/03/并发用户数的计算/1612527394(1).jpg" alt="1612527394(1)"><br>如上图所示，总共有 32 个用户进入了系统，但是绿色的用户并没有任何动作，那么显然，在线用户数是 32 个，并发用户数是 16 个，这时的并发度就是 50%<br>但是在系统中，往往是这样的：<br><img src="/2021/02/03/并发用户数的计算/1612527476(1).jpg" alt="1612527476(1)"><br>为了能 hold 住更多的用户，通常都会把一些数据放到 Redis 这样的缓存服务器中。所以在线用户数怎么算呢，如果仅从上面这种简单的图来看的话，其实就是缓存服务器能有多大，能 hold 住多少用户需要的数据<br>假设一个用户进入系统之后，需要用 10k 内存来维护一个用户的信息，那么 10G 的内存就能 hold 住 1,048,576 个用户的数据，这就是<strong>最大在线用户数</strong>了<br>但并发用户数不同，他们需要在系统中执行某个动作。我们要测试的重中之重，就是统计这些正在执行动作的并发用户数。当我们统计生产环境中的在线用户数时，并发用户数也是要同时统计的。这里会涉及到一个概念：<strong>并发度</strong><br><img src="/2021/02/03/并发用户数的计算/1612527926(1).jpg" alt="1612527926(1)"><br>通过这个图，我们可以看到一个简单的计算逻辑：<br>　1、如果有 10000 个在线用户数，同时并发度是 1%，那显然并发用户数就是 100<br>　2、如果每个线程的 20TPS，显然只需要 5 个线程就够了（这里说的线程指的是压力机的线程数）<br>　3、这时对 Server 来说，它处理的就是 100TPS，平均响应时间是 50ms (50ms = (1s/20TPS * 5)/5)<br>　4、如果我们有两个 Server 线程来处理，那么一个线程就是 50TPS<br>　5、有一个转换的细节，那就是<strong>并发用户数到压力机的并发线程数</strong><br>　而我们通常说的“并发”这个词，依赖 TPS 来承载的时候，指的都是 Server 端的处理能力，并不是压力工具上的并发线程数。在上面的例子中，我们说的并发就是指服务器上 100TPS 的处理能力，而不是指 5 个压力机的并发线程数<br><strong>不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了</strong></p>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>JMeter（1 个线程） - Nginx - Tomcat - MySQL ，来看看 JMeter 的处理情况：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">summary +   5922 in 00:00:30 =  197.4/s Avg:     4 Min:     0 Max:    26 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  35463 in 00:03:05 =  192.0/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br><span class="line">summary +   5922 in 00:00:30 =  197.5/s Avg:     4 Min:     0 Max:    24 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  41385 in 00:03:35 =  192.8/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br><span class="line">summary +   5808 in 00:00:30 =  193.6/s Avg:     5 Min:     0 Max:    25 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  47193 in 00:04:05 =  192.9/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br></pre></td></tr></table></figure>
 
-<p>JMeter 的平均响应时间基本都在 5ms，因为只有一个压力机线程，所以它的 TPS 应该接近1000ms/5ms=200TPS<br>但是服务端并没有一直干活，很多是空闲的</p>
-<ol>
-<li>并发用户数（TPS）是 193.6TPS。如果并发度为 5%，在线用户数就是 193.6/5%=3872</li>
-<li>响应时间是 5ms</li>
-<li>压力机并发线程数是 1</li>
-</ol>
+<p>JMeter 的平均响应时间基本都在 5ms，因为只有一个压力机线程，所以它的 TPS 应该接近1000ms/5ms=200TPS<br>但是服务端并没有一直干活，很多是空闲的<br>　1、并发用户数（TPS）是 193.6TPS。如果并发度为 5%，在线用户数就是 193.6/5%=3872<br>　2、响应时间是 5ms<br>　3、压力机并发线程数是 1</p>
 <p>换一个场景，在压力机上启动 10 个线程。结果如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">summary +  11742 in 00:00:30 =  391.3/s Avg:    25 Min:     0 Max:   335 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  55761 in 00:02:24 =  386.6/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br><span class="line">summary +  11924 in 00:00:30 =  397.5/s Avg:    25 Min:     0 Max:    80 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  67685 in 00:02:54 =  388.5/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br><span class="line">summary +  11884 in 00:00:30 =  396.2/s Avg:    25 Min:     0 Max:   240 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  79569 in 00:03:24 =  389.6/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br></pre></td></tr></table></figure>
 
 <p>平均响应时间在 25ms，我们来计算一处，TPS = (1000ms/25ms)*10=400TPS。这时服务端线程就忙多了：<br><img src="/2021/02/03/并发用户数的计算/1612529647(1).jpg" alt="1612529647(1)"></p>
-<ol>
-<li>并发用户数（TPS）是 396.2TPS。如果并发度为 5%，在线用户数就是 396.2/5%=7924</li>
-<li>响应时间是 25ms</li>
-<li>压力机并发线程数是 10<br>如果要有公式的话，这个计算公式将非常简单:<strong>TPS=1000ms/响应时间(单位ms) ∗ 压力机线程数</strong></li>
-</ol>
-<p>对于压力工具来说，只要不报错，我们就关心 TPS 和响应时间就可以了，因为 TPS 反应出来的是和服务器对应的处理能力，至少压力线程数是多少，并不关键</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
-<li>通常所说的并发都是指服务端的并发，而不是指压力机上的并发线程数</li>
-<li>性能中常说的并发，是用 TPS 这样的概念来承载具体数值的</li>
-<li>压力工具中的线程数、响应时间和 TPS 之间是有对应关系的</li>
-</ol>
+<p>　1、并发用户数（TPS）是 396.2TPS。如果并发度为 5%，在线用户数就是 396.2/5%=7924<br>　2、响应时间是 25ms<br>　3、压力机并发线程数是 10<br>如果要有公式的话，这个计算公式将非常简单:<strong>TPS=1000ms/响应时间(单位ms) ∗ 压力机线程数</strong><br>对于压力工具来说，只要不报错，我们就关心 TPS 和响应时间就可以了，因为 TPS 反应出来的是和服务器对应的处理能力，至少压力线程数是多少，并不关键</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>　1、通常所说的并发都是指服务端的并发，而不是指压力机上的并发线程数<br>　2、性能中常说的并发，是用 TPS 这样的概念来承载具体数值的<br>　3、压力工具中的线程数、响应时间和 TPS 之间是有对应关系的</p>
 
       
 
@@ -494,11 +471,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">《性能测试30讲》</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">顾问培训</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">《性能测试30讲》</a>
               </li>
              
               <li class="article-tag-list-item">
