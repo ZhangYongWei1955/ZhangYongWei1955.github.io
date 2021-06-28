@@ -6,19 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
-  <title>Tag: MySQL | yongwei&#39;s blogs</title>
+  <title>TPS和响应时间的关系 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录个人笔记">
-<meta name="keywords" content="个人笔记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yongwei&#39;s blogs">
-<meta property="og:url" content="https://yongwei19.github.io/tags/MySQL/index.html">
+  <meta name="description" content="性能场景是一个非常核心的概念。因为它会包括压力发起策略、业务模型、监控模型、性能数据、软硬件环境、分析模型等">
+<meta name="keywords" content="《性能测试30讲》">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TPS和响应时间的关系">
+<meta property="og:url" content="https://yongwei19.github.io/undefined/b0e613fb.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="记录个人笔记">
+<meta property="og:description" content="性能场景是一个非常核心的概念。因为它会包括压力发起策略、业务模型、监控模型、性能数据、软硬件环境、分析模型等">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/b0e613fb.htm/1611837851(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/b0e613fb.htm/1611838413(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/b0e613fb.htm/1611838670(1).jpg">
+<meta property="og:updated_time" content="2021-06-28T11:32:42.259Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yongwei&#39;s blogs">
-<meta name="twitter:description" content="记录个人笔记">
+<meta name="twitter:title" content="TPS和响应时间的关系">
+<meta name="twitter:description" content="性能场景是一个非常核心的概念。因为它会包括压力发起策略、业务模型、监控模型、性能数据、软硬件环境、分析模型等">
+<meta name="twitter:image" content="https://yongwei19.github.io/undefined/b0e613fb.htm/1611837851(1).jpg">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -171,75 +176,184 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-TPS和响应时间的关系" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/undefined/61694c2.html" class="archive-article-date">
-  	<time datetime="2021-06-28T11:07:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/undefined/61694c2.html">MySQL--测试人员要了解的测试点</a>
+    <h1 class="article-title" itemprop="name">
+      TPS和响应时间的关系
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/undefined/b0e613fb.html" class="archive-article-date">
+  	<time datetime="2021-01-28T12:42:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-28</time>
+</a>
+        
+
+        <!-- 添加不蒜子统计文章访问量 -->
+      
+        <span class="archive-article-date">
+          阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
+      
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>性能场景是一个非常核心的概念。因为它会包括<strong>压力发起策略、业务模型、监控模型、性能数据</strong>、<strong>软硬件环境、分析模型</strong>等</p>
+<a id="more"></a>
+
+<p>学习性能的人，一定看吐过一张图：<br><img src="/undefined/b0e613fb.htm/1611837851(1).jpg" alt="1611837851(1)"><br>在这个图中，定义了<strong>三条曲线、三个区域、两个点以及三个状态描述</strong>：</p>
+<p>　<strong>三条曲线：</strong>吞吐量的曲线（紫色）、使用率 / 用户数曲线（绿色）、响应时间曲线（深蓝色）<br>　<strong>三个区域：</strong>轻负载区（Light Load）、重负载区（Heavy Load）、塌陷区（Buckle Zone）<br>　<strong>两个点：</strong>最优并发用户数（The Optimum Number of Concurrent Users）、最大并发用户数（The Maximum Number of Concurrent Users）<br>　<strong>三个状态描述：</strong>资源饱和（Resource Saturated）、吞吐下降（Throughput Falling）、用户受影响（End Users Effected）</p>
+<p>这张图在很多地方都有被引用到，因为它真的很经典，这个图中有一些地方可能与实际存在误差。<br>一、<strong>重负载区的资源饱和，和 TPS 达到最大值之间都不是在同样的并发用户数之下的</strong><br>　　比如，当CPU资源使用率达到100%后，随着压力的增加,队列慢慢变长，但由于用户数增加的幅度会超过队列长度，所以TPS仍然会增加，即资源使用率达到饱和之后还有一段时间TPS才会达到上限<br>二、<strong>吞吐量曲线不一定会出现下降的情况，在有些控制较好的系统中会维持水平</strong><br>三、<strong>最优并发数这个点，通常只是一种感觉，并没有绝对的数据用来证明</strong><br>四、<strong>最大并发数应该在更前面的位置，因为性能已经衰减了</strong><br>在具体的项目实施中，一般会更关心服务端能处理的请求数即 TPS，而不是压力工具中的线程数</p>
+<hr>
+<p>这里简化出另一个图形，以说明更直接一点的关系。如下所示：<br><img src="/undefined/b0e613fb.htm/1611838413(1).jpg" alt="1611838413(1)"><br><strong>上图中蓝线表示 TPS，黄色表示响应时间</strong></p>
+<p>　１、在 TPS 增加的过程中，响应时间一开始会处在较低的状态，也就是在 A 点之前。<br>　２、接着响应时间开始有些增加，直到业务可以承受的时间点 B，这时 TPS 仍然有增长的空间。<br>　３、再接着增加压力，达到 C 点时，达到最大 TPS。<br>　４、我们再接着增加压力，响应时间接着增加，但 TPS 会有下降（这里并不是必然的，有些系统在队列上处理得很好，会保持稳定的 TPS，然后多出来的请求都被友好拒绝）<br>　５、最后，响应时间过长，达到了超时的程度</p>
+<hr>
+<p>　　有些人将第一张图中的 Light load 对应为性能测试，Heavy Load 对应为负载测试，Buckle Zone 对应为压力测试……事实上，这是不合理的。<br>用场景的定义来替换这些混乱的概念：<br><img src="/undefined/b0e613fb.htm/1611838670(1).jpg" alt="1611838670(1)"><br>　　在具体场景的操作层面，只有场景中的配置才是具体可操作的。而通常大家认为的性能测试、负载测试、压力测试在操作的层面，只有压力工具中线程数的区别，其他的都在资源分析的层面，而分析在很多人的眼中，都不算测试。<br>　　总之，在具体的性能项目中，性能场景是一个非常核心的概念。因为它会包括<strong>压力发起策略、业务模型、监控模型、性能数据</strong>（性能中的数据，一直都不把它称之为模型，因为在数据层面，测试并没有做过什么抽象的动作，只是使用）、<strong>软硬件环境、分析模型</strong>等。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">顾问培训</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">《性能测试30讲》</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/工作记录//" class="article-tag-list-link color5">工作记录</a>
+        			<a href="/categories/读书笔记//" class="article-tag-list-link color5">读书笔记</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yongwei19.github.io/undefined/b0e613fb.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/undefined/e1cc58e1.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          并发用户数的计算
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/undefined/261e9ecb.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用ticket解决单点登录的跨域问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -279,9 +393,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

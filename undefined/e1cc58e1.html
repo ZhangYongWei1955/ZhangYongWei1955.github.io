@@ -6,19 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
-  <title>Tag: MySQL | yongwei&#39;s blogs</title>
+  <title>并发用户数的计算 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录个人笔记">
-<meta name="keywords" content="个人笔记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yongwei&#39;s blogs">
-<meta property="og:url" content="https://yongwei19.github.io/tags/MySQL/index.html">
+  <meta name="description" content="不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了">
+<meta name="keywords" content="《性能测试30讲》">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发用户数的计算">
+<meta property="og:url" content="https://yongwei19.github.io/undefined/e1cc58e1.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="记录个人笔记">
+<meta property="og:description" content="不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/e1cc58e1.htm/1612526703(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/e1cc58e1.htm/1612526866(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/e1cc58e1.htm/1612527394(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/e1cc58e1.htm/1612527476(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/e1cc58e1.htm/1612527926(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/undefined/e1cc58e1.htm/1612529647(1).jpg">
+<meta property="og:updated_time" content="2021-06-28T11:28:19.907Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yongwei&#39;s blogs">
-<meta name="twitter:description" content="记录个人笔记">
+<meta name="twitter:title" content="并发用户数的计算">
+<meta name="twitter:description" content="不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了">
+<meta name="twitter:image" content="https://yongwei19.github.io/undefined/e1cc58e1.htm/1612526703(1).jpg">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -171,75 +179,189 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-并发用户数的计算" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/undefined/61694c2.html" class="archive-article-date">
-  	<time datetime="2021-06-28T11:07:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/undefined/61694c2.html">MySQL--测试人员要了解的测试点</a>
+    <h1 class="article-title" itemprop="name">
+      并发用户数的计算
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/undefined/e1cc58e1.html" class="archive-article-date">
+  	<time datetime="2021-02-03T13:42:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-03</time>
+</a>
+        
+
+        <!-- 添加不蒜子统计文章访问量 -->
+      
+        <span class="archive-article-date">
+          阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
+      
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了</strong></p>
+<a id="more"></a>
+
+<p>绝对并发指的是同一时刻的并发数；相对并发指的是一个时间段内发生的事情</p>
+<h4 id="什么是并发？"><a href="#什么是并发？" class="headerlink" title="什么是并发？"></a>什么是并发？</h4><p><img src="/undefined/e1cc58e1.htm/1612526703(1).jpg" alt="1612526703(1)"><br>假设上图中的这些小人是严格按照这个逻辑到达系统的，那显然，系统的绝对并发用户数是 4。如果描述 1 秒内的并发用户数，那就是 16<br>但是，在实际的系统中，用户通常是这样分配的：<br><img src="/undefined/e1cc58e1.htm/1612526866(1).jpg" alt="1612526866(1)"><br>用户会分布在系统中不同的服务、网络等对象中，”绝对并发“的概念就很难描述了<br>这时建议用 TPS 来承载“并发”这个概念，并发数是 16TPS，就是 1 秒内整个系统处理了 16 个事务</p>
+<h4 id="在线用户数、并发用户数怎么计算"><a href="#在线用户数、并发用户数怎么计算" class="headerlink" title="在线用户数、并发用户数怎么计算"></a>在线用户数、并发用户数怎么计算</h4><p><img src="/undefined/e1cc58e1.htm/1612527394(1).jpg" alt="1612527394(1)"><br>如上图所示，总共有 32 个用户进入了系统，但是绿色的用户并没有任何动作，那么显然，在线用户数是 32 个，并发用户数是 16 个，这时的并发度就是 50%<br>但是在系统中，往往是这样的：<br><img src="/undefined/e1cc58e1.htm/1612527476(1).jpg" alt="1612527476(1)"><br>为了能 hold 住更多的用户，通常都会把一些数据放到 Redis 这样的缓存服务器中。所以在线用户数怎么算呢，如果仅从上面这种简单的图来看的话，其实就是缓存服务器能有多大，能 hold 住多少用户需要的数据<br>假设一个用户进入系统之后，需要用 10k 内存来维护一个用户的信息，那么 10G 的内存就能 hold 住 1,048,576 个用户的数据，这就是<strong>最大在线用户数</strong>了<br>但并发用户数不同，他们需要在系统中执行某个动作。我们要测试的重中之重，就是统计这些正在执行动作的并发用户数。当我们统计生产环境中的在线用户数时，并发用户数也是要同时统计的。这里会涉及到一个概念：<strong>并发度</strong><br><img src="/undefined/e1cc58e1.htm/1612527926(1).jpg" alt="1612527926(1)"><br>通过这个图，我们可以看到一个简单的计算逻辑：<br>　1、如果有 10000 个在线用户数，同时并发度是 1%，那显然并发用户数就是 100<br>　2、如果每个线程的 20TPS，显然只需要 5 个线程就够了（这里说的线程指的是压力机的线程数）<br>　3、这时对 Server 来说，它处理的就是 100TPS，平均响应时间是 50ms (50ms = (1s/20TPS * 5)/5)<br>　4、如果我们有两个 Server 线程来处理，那么一个线程就是 50TPS<br>　5、有一个转换的细节，那就是<strong>并发用户数到压力机的并发线程数</strong><br>　而我们通常说的“并发”这个词，依赖 TPS 来承载的时候，指的都是 Server 端的处理能力，并不是压力工具上的并发线程数。在上面的例子中，我们说的并发就是指服务器上 100TPS 的处理能力，而不是指 5 个压力机的并发线程数<br><strong>不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了</strong></p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>JMeter（1 个线程） - Nginx - Tomcat - MySQL ，来看看 JMeter 的处理情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">summary +   5922 in 00:00:30 =  197.4/s Avg:     4 Min:     0 Max:    26 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  35463 in 00:03:05 =  192.0/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br><span class="line">summary +   5922 in 00:00:30 =  197.5/s Avg:     4 Min:     0 Max:    24 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  41385 in 00:03:35 =  192.8/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br><span class="line">summary +   5808 in 00:00:30 =  193.6/s Avg:     5 Min:     0 Max:    25 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  47193 in 00:04:05 =  192.9/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br></pre></td></tr></table></figure>
+
+<p>JMeter 的平均响应时间基本都在 5ms，因为只有一个压力机线程，所以它的 TPS 应该接近1000ms/5ms=200TPS<br>但是服务端并没有一直干活，很多是空闲的<br>　1、并发用户数（TPS）是 193.6TPS。如果并发度为 5%，在线用户数就是 193.6/5%=3872<br>　2、响应时间是 5ms<br>　3、压力机并发线程数是 1</p>
+<p>换一个场景，在压力机上启动 10 个线程。结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">summary +  11742 in 00:00:30 =  391.3/s Avg:    25 Min:     0 Max:   335 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  55761 in 00:02:24 =  386.6/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br><span class="line">summary +  11924 in 00:00:30 =  397.5/s Avg:    25 Min:     0 Max:    80 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  67685 in 00:02:54 =  388.5/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br><span class="line">summary +  11884 in 00:00:30 =  396.2/s Avg:    25 Min:     0 Max:   240 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  79569 in 00:03:24 =  389.6/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br></pre></td></tr></table></figure>
+
+<p>平均响应时间在 25ms，我们来计算一处，TPS = (1000ms/25ms)*10=400TPS。这时服务端线程就忙多了：<br><img src="/undefined/e1cc58e1.htm/1612529647(1).jpg" alt="1612529647(1)"></p>
+<p>　1、并发用户数（TPS）是 396.2TPS。如果并发度为 5%，在线用户数就是 396.2/5%=7924<br>　2、响应时间是 25ms<br>　3、压力机并发线程数是 10<br>如果要有公式的话，这个计算公式将非常简单:<strong>TPS=1000ms/响应时间(单位ms) ∗ 压力机线程数</strong><br>对于压力工具来说，只要不报错，我们就关心 TPS 和响应时间就可以了，因为 TPS 反应出来的是和服务器对应的处理能力，至少压力线程数是多少，并不关键</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>　1、通常所说的并发都是指服务端的并发，而不是指压力机上的并发线程数<br>　2、性能中常说的并发，是用 TPS 这样的概念来承载具体数值的<br>　3、压力工具中的线程数、响应时间和 TPS 之间是有对应关系的</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">顾问培训</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">《性能测试30讲》</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/工作记录//" class="article-tag-list-link color5">工作记录</a>
+        			<a href="/categories/读书笔记//" class="article-tag-list-link color5">读书笔记</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yongwei19.github.io/undefined/e1cc58e1.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/undefined/988fc685.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          初识AB测试
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/undefined/b0e613fb.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TPS和响应时间的关系</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -279,9 +401,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
