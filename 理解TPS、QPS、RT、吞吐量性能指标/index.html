@@ -224,6 +224,13 @@
 <h3 id="压力工具中的线程数和用户数与-TPS"><a href="#压力工具中的线程数和用户数与-TPS" class="headerlink" title="压力工具中的线程数和用户数与 TPS"></a>压力工具中的线程数和用户数与 TPS</h3><p><img src="/理解TPS、QPS、RT、吞吐量性能指标/1611576941(1).jpg" alt="1611576941(1)"><br>并发线程数在没有模拟真实用户操作的情况下，和真实的用户操作差别非常远。从上图中，可以知道压力工具是 4 个并发线程，由于每个线程都可以在一秒内完成 4 个事务，所以总的TPS是16<br>那么用户数怎么来定义呢？有些人认为一个系统如果有 1 万个用户在线，那就应该测试 1 万的并发线程，这种逻辑实在是不技术。通常，我们会对在线的用户做并发度的分析，在很多业务中，并发度都会低于 5%，甚至低于 1%。<br>拿 5% 来计算，就是 10000 用户 x5%=500(TPS)，注意哦，这里是 TPS，而不是并发线程数。如果这时响应时间是 100ms，那显然并发线程数是 500TPS/(1000ms/100ms)=50(并发线程)。<br>通过这样简单的计算逻辑，我们就可以看出来用户数、线程数和 TPS 之间的关系了：<br><img src="/理解TPS、QPS、RT、吞吐量性能指标/1611576981(1).jpg" alt="1611576981(1)"><br>但是！响应时间肯定不会一直都是 100ms 的嘛。所以通常情况下，上面的这个比例都不会固定，而是随着并发线程数的增加，会出现趋势上的关系</p>
 
       
+      
+      <!-- 添加底部版权声明 -->
+      
+      
+        <div class="declare" hidden="hidden"></div>
+        
+      <!-- 添加底部版权声明结束 -->
 
       
     </div>
@@ -256,57 +263,6 @@
 
       
 
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yongwei19.github.io/理解TPS、QPS、RT、吞吐量性能指标/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
@@ -470,7 +426,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,7 +434,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -486,11 +442,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AB测试</a>
+                <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
+                <a href="javascript:void(0)" class="js-tag color5">AB测试</a>
               </li>
              
               <li class="article-tag-list-item">

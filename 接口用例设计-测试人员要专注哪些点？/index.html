@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="yongwei&#39;s blogs">
 <meta property="og:description" content="接口测试虽然大家都很经常做，接口用例也可能经常写，但我发现很多人写接口用例会局限在：简单的出入参的验证、然后再结合“等价类””边界值”等等方法来设计用例。这些其实都是对的，但我只是觉得还少了很多内容，接口用例设计要考虑的维度其实很多，下面就聊聊接口用例设计要关注的点">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-06-29T13:28:37.854Z">
+<meta property="og:updated_time" content="2021-06-30T11:40:41.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="接口用例设计--测试人员要专注哪些点？">
 <meta name="twitter:description" content="接口测试虽然大家都很经常做，接口用例也可能经常写，但我发现很多人写接口用例会局限在：简单的出入参的验证、然后再结合“等价类””边界值”等等方法来设计用例。这些其实都是对的，但我只是觉得还少了很多内容，接口用例设计要考虑的维度其实很多，下面就聊聊接口用例设计要关注的点">
@@ -218,6 +218,28 @@
 <h5 id="十三、数据一致性校验"><a href="#十三、数据一致性校验" class="headerlink" title="十三、数据一致性校验"></a><strong>十三、数据一致性校验</strong></h5><p>1、长度一致性：<br>　　① DB 字段和代码定义类型的长度一致性<br>　　② DB 表字段长度定义是否合理<br>　　③ <strong>上下游系统相同字段长度一致性</strong>(下游字段不能比上游短)<br>　　④ 前后端长度一致性验证<br>　　⑤ <strong>批量接口入参的最大 size 限制要和需要调用的外部接口的最大size限制兼容</strong><br>　　⑥ 测试方法：设计方案评审和代码走查确认<br>2、<strong>多数据源一致性：缓存和 DB 之间的数据一致性</strong><br>本地缓存验证方法：<br>　　① 请求1次数据，则本地和分布式都有数据<br>　　② 关 DB，清空分布式缓存数据<br>　　③ 再请求一次数据</p>
 
       
+      
+      <!-- 添加底部版权声明 -->
+      
+      
+        <div class="declare">
+          <br><br>
+          <strong>本文作者：</strong>
+          
+            鸡肉味·嘎嘣脆
+          
+          <br>
+          <strong>本文链接：</strong>
+          https://yongwei19.github.io/接口用例设计-测试人员要专注哪些点？/
+          <br>
+          <strong>版权声明：</strong>
+            本文采用
+          <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+            进行许可。转载请注明出处！
+          
+        </div>
+      
+      <!-- 添加底部版权声明结束 -->
 
       
     </div>
@@ -262,57 +284,6 @@
 
       
 
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yongwei19.github.io/接口用例设计-测试人员要专注哪些点？/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
@@ -467,7 +438,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -475,7 +446,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -483,11 +454,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AB测试</a>
+                <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
+                <a href="javascript:void(0)" class="js-tag color5">AB测试</a>
               </li>
              
               <li class="article-tag-list-item">
