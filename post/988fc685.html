@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
-  <title>MySQL--测试人员要了解的测试点 | yongwei&#39;s blogs</title>
+  <title>初识AB测试 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
-<meta name="keywords" content="MySQL,顾问培训">
+  <meta name="description" content="AB测试的概念来源于生物医学的双盲测试，双盲测试中病人被随机分成两组，在不知情的情况下分别给予安慰剂和测试用药，经过一段时间的实验后再来比较这两组病人的表现是否具有显著的差异，从而决定测试用药是否有效">
+<meta name="keywords" content="AB测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL--测试人员要了解的测试点">
-<meta property="og:url" content="https://yongwei19.github.io/MySQL--测试人员要了解的测试点/index.html">
+<meta property="og:title" content="初识AB测试">
+<meta property="og:url" content="https://yongwei19.github.io/post/988fc685.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
+<meta property="og:description" content="AB测试的概念来源于生物医学的双盲测试，双盲测试中病人被随机分成两组，在不知情的情况下分别给予安慰剂和测试用药，经过一段时间的实验后再来比较这两组病人的表现是否具有显著的差异，从而决定测试用药是否有效">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-06-30T11:40:31.745Z">
+<meta property="og:image" content="https://yongwei19.github.io/post/988fc685/0.jpg">
+<meta property="og:image" content="https://yongwei19.github.io/post/988fc685/1.jpg">
+<meta property="og:updated_time" content="2021-07-02T13:04:00.553Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL--测试人员要了解的测试点">
-<meta name="twitter:description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
+<meta name="twitter:title" content="初识AB测试">
+<meta name="twitter:description" content="AB测试的概念来源于生物医学的双盲测试，双盲测试中病人被随机分成两组，在不知情的情况下分别给予安慰剂和测试用药，经过一段时间的实验后再来比较这两组病人的表现是否具有显著的差异，从而决定测试用药是否有效">
+<meta name="twitter:image" content="https://yongwei19.github.io/post/988fc685/0.jpg">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -172,20 +175,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MySQL--测试人员要了解的测试点" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-初识AB测试" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MySQL--测试人员要了解的测试点
+      初识AB测试
     </h1>
   
 
         
-        <a href="/MySQL--测试人员要了解的测试点/" class="archive-article-date">
-  	<time datetime="2021-06-28T11:07:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-28</time>
+        <a href="/post/988fc685.html" class="archive-article-date">
+  	<time datetime="2021-06-24T07:59:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-24</time>
 </a>
         
 
@@ -200,30 +203,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的<strong>测试点</strong>：</p>
+        <p>AB测试的概念来源于生物医学的双盲测试，双盲测试中病人被随机分成两组，在不知情的情况下<strong>分别给予安慰剂和测试用药</strong>，经过一段时间的实验后再来<strong>比较</strong>这两组病人的表现<strong>是否具有显著的差异</strong>，从而决定测试用药是否有效</p>
 <a id="more"></a>
-
-<p>1、<strong>表字段是否多余</strong></p>
-<p>2、<strong>表字段长度是否合适</strong><br>　① 布尔和枚举建议 tiny<br>　② 日期和时间戳：timestamp 或 int<br>　③ 字符类型：char，text，blob 等建议经量使用符合长度的 varchar(n)<br>　④ 小数和货币：移位转为int或者 decimal<br>　⑤ 小数和货币：移位转为int或者 decimal<br>　⑥ ip 地址：int</p>
-<p>3、<strong>表字段是否需要加密</strong></p>
-<p>4、<strong>表是否需要创建对应索引</strong><br>　① 索引字段的顺序考虑字段的选择性，选择性高的放前面(选择性高：字段不重复)<br>　② 合理使用联合索引，避免多个冗余的单个索<br>　③ 合理利用覆盖索引</p>
-<p>5、<strong>sql 是否能命中合适的索引</strong><br>　如果没有能力静态分析，就依靠线下 sql 分析工具，或者手工做参数替换后拿到线上去做 explain，重点关注 type 和 extra 字段</p>
-<p>6、sql 查询是否只查需要的字段，<strong>禁止select *</strong></p>
-<p>7、sql 未来的增速预估及性能保证方案是否有考虑，比如：<br>　① 垂直拆分：按业务将表拆分到不同的库<br>　② 水平拆分：分表分库<br>　③ <strong>读写分离</strong>：在业务允许的情况下，在从库中读取非实时数据<br>　④ 定时归档<br>　⑤ 缩小查询范围：时间或者业务范围</p>
-<p>8、不建议 sql 使用子查询</p>
-<p>9、不建议 sql 中 join 超过3张表</p>
-<p>10、<strong>模糊查询%要加在后面</strong></p>
-<p>11、模糊查询很多的场景，是否使用 ES 更合理？</p>
-<p>12、注意隐式类型转换的危害</p>
-<p>13、尽量<strong>不在 sql 中做数学运算，函数计算</strong>等</p>
-<p>14、group by 时会默认排序，如果业务没必要排序，建议加 order by null</p>
-<p>15、<strong>禁止使用存储过程，函数、触发器、外键约束</strong></p>
-<p>16、sql 的超时是否需要设置 (一般是100mm，mybatis 设置/数据库连接池)</p>
-<p>17、能不使用事务的，就不要使用事务，优先使用其它方式保证数据一致性</p>
-<p>18、事务的跨度要尽量小</p>
-<p>19、分表分库涉及时，要考虑到<strong>数据分布均匀，避免单库 或 单表数据倾斜</strong></p>
-<p>　<em>上述均为平时工作时的总结，如有错误，望指出</em></p>
-
+<h5 id="一、互联网公司的-AB-测试"><a href="#一、互联网公司的-AB-测试" class="headerlink" title="一、互联网公司的 AB 测试"></a>一、互联网公司的 AB 测试</h5><p>互联网公司的AB测试也采用了类似的概念：将 Web 或 App 界面或流程的两个或多个版本，在<strong>同一时间维度，分别让两个或多个属性或组成成分相同（相似）的访客群组访问</strong>，收集各群组的用户体验数据和业务数据，最后分析评估出最好版本正式采用</p>
+<img src="/post/988fc685/0.jpg">
+<h5 id="二、AB-测试的应用场景"><a href="#二、AB-测试的应用场景" class="headerlink" title="二、AB 测试的应用场景"></a>二、AB 测试的应用场景</h5><p>AB 测试应用场景由小到大可分为：<br>　1、<strong>控件层面</strong>：如通过对比按钮文案、颜色、位置、形状等差异对转化率造成的影响，从而确定转化率最高的按钮形态；<br>　2、<strong>功能层面</strong>：如通过 AB 测试确定最优的推荐算法、定价策略；<br>　3、<strong>产品层面</strong>：通过灰度发布，在确保改版安全有效后再面向全量用户发布。</p>
+<h5 id="三、AB-测试的使用"><a href="#三、AB-测试的使用" class="headerlink" title="三、AB 测试的使用"></a>三、AB 测试的使用</h5><p>AB测试是一个反复迭代优化的过程，它的基本步骤可以划分为：<br>　１、<strong>目标：</strong>设定项目目标即AB测试的目标；<br>　２、<strong>方案：</strong>设计优化的迭代开发方案，完成新模块的开发；<br>　３、<strong>分流：</strong>确定分流方案；<br>　４、<strong>测试：</strong>按照分流比例开放线上流量进行测试；<br>　５、<strong>数据：</strong>收集实验数据进行有效性和效果判断；<br>　６、<strong>对比：</strong>对比试验结果确定发布新版本、调整分流比例继续测试或者在试验效果未达成的情况下继续优化迭代方案重新开发上线试验。</p>
+<h5 id="四、AB测试的两个重要问题"><a href="#四、AB测试的两个重要问题" class="headerlink" title="四、AB测试的两个重要问题"></a>四、AB测试的两个重要问题</h5><p><strong>4.1、分流策略</strong><br>AB测试是对线上生产环境的测试，测试版本的流量通常不宜过大。尤其对于那些影响范围较大的改版。但是，测试版本的流量如果太小又可能造成随机结果的引入，试验结果失去统计意义。<br>为了规避这种因为样本量不足造成的试验结果不可用，在AB测试设计时可以采用如下措施：<br>　１、试验设计时预估进入试验的样本量，做分流规划时避免分配给测试集的样本量过少；<br>　２、除了进行AB测试外增加关于数据有效性考量的AA测试，将原始版本的流量中分出两个和测试版本相同的流量也进入测试；<br>　３、如果参与测试新版本已经分配了很大的流量比例，但是仍然存在样本量不足的情况，这时就只能通过拉长试验时间的方式来累积足够的样本量进行比较了。</p>
+<p><strong>4.2、效果分析</strong><br>AB测试实验效果的分析通常分为两个步骤：<br>　<strong>a)、实验有效性的判断：</strong><br>　　即判断实验的分流是否已经到达所需要的最小样本量，从而能够以较大的概率拒绝两类统计错误的发生。最小样本量的判断可以采用假设实验目标指标符合正态分布下，两类错误发生概率的分位数的方式进行估算。或者更一般的可以采用AA测试，对两个老版本的实验结果计算P值，从而判断其是否存在显著差异。如果AA实验的结果不存在显著差异，那么可以认为实验结果是有效的，进而可以对新老版本的实验结果进行进一步的判断<br>　<strong>b)、实验结果的比较：</strong><br>　　在确认实验有效后对实验的结果进行判断，通常通过比较新实验版本和老版本是否存在显著差异（前述的P值判断），以及计算实验结果指标的置信区间（通常选用指标的95%置信区间），从而判断新版本是否相对老版本存在显著提升或下降。</p>
+<hr>
+<p>关于最小样本量、测试时长、实验结果对比，有很多线上计算工具供使用，如：<a href="https://abtestguide.com/calc/" target="_blank" rel="noopener">https://abtestguide.com/calc/</a></p>
+<img src="/post/988fc685/1.jpg">
       
       
       <!-- 添加底部版权声明 -->
@@ -237,7 +227,7 @@
           
           <br>
           <strong>本文链接：</strong>
-          https://yongwei19.github.io/MySQL--测试人员要了解的测试点/
+          https://yongwei19.github.io/post/988fc685.html
           <br>
           <strong>版权声明：</strong>
             本文采用
@@ -258,11 +248,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">顾问培训</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AB测试</a>
         		</li>
       		
 		</ul>
@@ -292,18 +278,18 @@
   
 <nav id="article-nav">
   
-    <a href="/Redis-测试人员要了解的测试点/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/post/43902f53.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Redis--测试人员要了解的测试点
+          Web安全基础
         
       </div>
     </a>
   
   
-    <a href="/Web安全基础/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Web安全基础</div>
+    <a href="/post/e1cc58e1.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">并发用户数的计算</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -446,7 +432,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -454,19 +440,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">《性能测试30讲》</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">

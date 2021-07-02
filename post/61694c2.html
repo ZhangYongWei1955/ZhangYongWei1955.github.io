@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
-  <title>性能测试前要准备些什么？ | yongwei&#39;s blogs</title>
+  <title>MySQL--测试人员要了解的测试点 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="性能测试的重要程度早已不言而喻了，它的测试内容也丰富多彩。但性能测试也是很深的领域，并不是所有测试工程师都能做(需要掌握非常多软技能)，即使要做也要做好充分的准备，这次就从(压测前务必弄清楚的事、不同类型的测试策略、压测报告)三个维度总结一下开展一次性能测试前要准备哪些内容(长文干货)">
-<meta name="keywords" content="顾问培训,性能测试">
+  <meta name="description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
+<meta name="keywords" content="顾问培训,MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="性能测试前要准备些什么？">
-<meta property="og:url" content="https://yongwei19.github.io/性能测试前要准备些什么？/index.html">
+<meta property="og:title" content="MySQL--测试人员要了解的测试点">
+<meta property="og:url" content="https://yongwei19.github.io/post/61694c2.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="性能测试的重要程度早已不言而喻了，它的测试内容也丰富多彩。但性能测试也是很深的领域，并不是所有测试工程师都能做(需要掌握非常多软技能)，即使要做也要做好充分的准备，这次就从(压测前务必弄清楚的事、不同类型的测试策略、压测报告)三个维度总结一下开展一次性能测试前要准备哪些内容(长文干货)">
+<meta property="og:description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-01T12:28:23.812Z">
+<meta property="og:updated_time" content="2021-06-30T11:40:31.745Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="性能测试前要准备些什么？">
-<meta name="twitter:description" content="性能测试的重要程度早已不言而喻了，它的测试内容也丰富多彩。但性能测试也是很深的领域，并不是所有测试工程师都能做(需要掌握非常多软技能)，即使要做也要做好充分的准备，这次就从(压测前务必弄清楚的事、不同类型的测试策略、压测报告)三个维度总结一下开展一次性能测试前要准备哪些内容(长文干货)">
+<meta name="twitter:title" content="MySQL--测试人员要了解的测试点">
+<meta name="twitter:description" content="一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的测试点：">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -172,20 +172,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-性能测试前要准备些什么？" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL--测试人员要了解的测试点" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      性能测试前要准备些什么？
+      MySQL--测试人员要了解的测试点
     </h1>
   
 
         
-        <a href="/性能测试前要准备些什么？/" class="archive-article-date">
-  	<time datetime="2021-07-01T11:16:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-01</time>
+        <a href="/post/61694c2.html" class="archive-article-date">
+  	<time datetime="2021-06-28T11:07:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-28</time>
 </a>
         
 
@@ -200,37 +200,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>性能测试的重要程度早已不言而喻了，它的测试内容也丰富多彩。但性能测试也是很深的领域，并不是所有测试工程师都能做(需要掌握非常多软技能)，即使要做也要做好充分的准备，这次就从(<strong>压测前务必弄清楚的事、不同类型的测试策略、压测报告</strong>)三个维度总结一下开展一次<strong>性能测试前要准备哪些内容</strong>(<em>长文干货</em>)</p>
+        <p>一个项目中，数据库是必不可少的，而对数据库的相关验证也是测试人员的测试内容之一，以下是我从常用数据库 MySQL 的组件维度总结出的<strong>测试点</strong>：</p>
 <a id="more"></a>
 
-<h4 id="压测前务必弄清楚的事"><a href="#压测前务必弄清楚的事" class="headerlink" title="压测前务必弄清楚的事"></a><strong>压测前务必弄清楚的事</strong></h4><h5 id="一、要明确压测类型"><a href="#一、要明确压测类型" class="headerlink" title="一、要明确压测类型"></a>一、要明确压测类型</h5><p>明确压测类型，这决定了压测使用的环境、压测策略，及输出的测试报告：<br>1、调优<br>2、容量摸底，对线上容量(<strong>系统、链路、对象</strong>)进行摸底<br>3、稳定性</p>
-<h5 id="二、要明确压测对象"><a href="#二、要明确压测对象" class="headerlink" title="二、要明确压测对象"></a>二、要明确压测对象</h5><p>压测之前要弄清楚，自己测什么<br>1、单接口<br>2、单个应用<br>3、单链路<br>4、全链路</p>
-<h5 id="三、要指定合理的停止条件"><a href="#三、要指定合理的停止条件" class="headerlink" title="三、要指定合理的停止条件"></a>三、要指定合理的停止条件</h5><p>1、<strong>最大 cpu 使用量：</strong>目前我们线上配置的告警阀值一般是连续两次大于70%，或者一分钟累计5次大于70%<br>2、<strong>响应时间</strong>，一般参考90%的响应时间不大于某个值，具体的选择可以参考：<br>　　① 上游系统的客户端超时时间<br>　　② 服务中心配置的针对不同域的最大响应时间<br>3、<strong>网络流量使用：</strong>目前线上配置的告警阀值：物理机流量使用大于网卡带宽80%，容器流量大于400Mbps<br>4、<strong>错误日志：</strong>5xx、4xx、包括业务超时、框架出错、如线程池爆了<br>5、<strong>gc 情况：</strong><br>　　① ygc：看fgc的时间占比，理论上 gc 时间占比超过10%，可以作为调优的一个备选项<br>　　② fgc：要从多个维度看：<br>　　　A：一是看 fgc 时间的占比，理论上 gc 时间占比超过10%，可以作为调优的一个备选项；<br>　　　B：二是结合具体的业务诉求，假如1个小时1次，而且每次 gc 时间都要花500ms以上，或者已经很明显的导致业务出现响应超时，这个时候也要优化，当然1个小时6次肯定也要考虑排查和优化<br>　　③ oom：当业务 oom 的时候，也要考虑排查和优化了</p>
-<h5 id="四、性能风险评估"><a href="#四、性能风险评估" class="headerlink" title="四、性能风险评估"></a>四、性能风险评估</h5><p>1、<strong>代码层面：</strong><br>　　① SQL 语句的数量及性能<br>　　② 外部接口调用的数量及超时配置<br>　　③ 批量接口，不同入参 size 大小的区别<br>　　④ 该缓存的东西是否有缓存<br>　　⑤ 对于同样一份信息。有没有重复去查一个外部接口和重复查db或者缓存<br>　　⑥ 锁：不该用锁的地方是有用了锁；该用锁的地方是否忘了锁<br>　　⑦ 循环：循环嵌套的合理性、会不会出现死循环<br>　　⑧ 日志：日志频率的合理性、日志序列化位置的合理性、Log4j 的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Log4j的配置：</span><br><span class="line">	输出到console是输出到本地磁盘(无缓存)的1.33倍</span><br><span class="line">	无缓存输出到本地磁盘是加缓存输出到本地磁盘的1.09倍（实际情况buffersize不一样，性能也不一样）</span><br><span class="line">	输出到本地磁盘(无缓存)+输出到console是输出到本地磁盘(无缓存)的1.48倍</span><br><span class="line">	磁盘的配置</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>2、系统组件配置层面</strong><br><strong>JVM：</strong><br>　　① 各种垃圾回收器的选择<br>　　② -XXPermSize、-XX:MaxPermSIze<br>　　③ -Xmn、-XX:NewRatio、-XX:SurvivorRatio = 64</p>
-<p><strong>redis：</strong><br>　　① 是否启动账户校验<br>　　② 集群的实例数量<br>　　③ 单 key 的大小，单 key 超过 Ethernet MTU 是会明显下降<br>　　④ 是否部署到虚拟机，官网说部署在虚拟机会比较慢<br>　　⑤ 使用长连接还是短连接<br>　　⑥ 服务端、客户端连接数量配置<br>　　⑦ 数据结构的选择，比如我们 DBA 优先推荐使用 hash 接口，体积小，省内存<br>　　⑧ 淘汰策略</p>
-<p><strong>kafka：</strong><br>　　① request.required.acks = -1(all) | 0 | 1， producer.type = sync/asyn<br>　　② min.insync.repilcas<br>　　③ 每个topic patition数量的大小<br>　　④ 消息体大小</p>
-<p><strong>MC：</strong><br>　　① 单实例的最大内存配置<br>　　② 实例的个数<br>　　③ 是否禁用 CAS 命令(可以禁止版本计数，减少开销)<br>　　④ 单key的存储内容大小<br>　　⑤ 服务端和客户端的最大同时连接数<br>　　⑥ 淘汰策略</p>
-<p><strong>MySQL：</strong><br>　1、log-bin 的开关<br>　2、sync_binlog，并发量高的情况下可损失5倍的性能<br>　3、performance_schema 功能的开关情况，会降低10~20个百分点的性能<br>　4、AHI(子适应索引)，并不是开启了一定能加速查询，有可能会弊大于利，因为并发有可能会导致锁竞争（5.5只有1把全局锁，5.7有17把全局锁），尤其对于多表 join、模糊查询和查询条件经常变的场景<br>　5、DB 的数量，当 DB 是瓶颈时，一个库和两个库结果肯定是不一样的<br>　6、DB 的索引：是否能命中索引，走的索引是否最优<br>　7、DB 中数据量，100条数据和1000万条数据的查询响应时间肯定不一样<br>　8、DB 中的数据类型分布：如 pos 这边所有尺码都是单仓的和所有尺码都是多仓的肯定不一样<br>　9、DB 的最大连接数：max_conncetions；back_log:tcp 链接请求等待栈，并发量大是适当调大这个值，增加短时间内处理链接的数量<br>　10、DB 的链接线程池大小<br>　11、是否开启 query cache：要权衡利弊，只适用于表数据不经常修改的场景，如果表数据频繁修改或者查询条件经常变，一方面命中率低，另一方面是频繁删除缓存，会给系统带来二次的开销<br>　12、thread_cache_size：通过查询 show global status like “Thread%”；查看 thread_created 的值，如果太大说明 mysql 一直在创建线程，可以适当调整一下这个值<br>　13、配置中心</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">IBP(innodb buffer pool)配置：</span><br><span class="line">	innodb_buffer_pool_size 越大，可以减少回磁盘查询的概率，但太大就会产生swap页交换，推荐IBP大小设置为80%的系统物理内存</span><br><span class="line">	innodb_buffer_pool_instances，建议设置为innodb_read_io_threads + innodb_write_io_threads之和</span><br><span class="line">	innodb_read_io_threads 和 innodb_write_io_threads ，根据查询出来的读写比例配置</span><br><span class="line">	innodb_log_file_size，redo log的日志大小，理论上越大，那触发检查点的概率越小，对性能损耗越小，但太大则恢复时间长，不方便管理，建议1G</span><br><span class="line">	innodb_flush_log_at_trx_commit：控制 redo log 的落盘策略，1是实时洛到磁盘，2是实时洛到文件，然后再洛磁盘，0是1s刷新到文件和磁盘</span><br></pre></td></tr></table></figure>
-
-<p><strong>堆内外缓存：</strong><br>　　① 最大存储对象的维度：内存使用维度还是存储数量维度<br>　　② 最大存储配置<br>　　③ 淘汰策略</p>
-<p><strong>系统拓扑：</strong>系统中各组件的机房分布导致网络损耗<br><strong>操作系统</strong></p>
-<hr>
-<p><strong>3、硬件配置</strong><br>　　① CPU 的型号，核数量，主频<br>　　② 网络带宽<br>　　③ 内存，java 应用如果不用堆内外缓存，只要内存能够满足java堆的配置即可，但如果用到堆内外缓存，这个时候，内存越大，可分配的缓存空间越大，在数据量大的场景下，性能可能更好<br>　　④ 磁盘类型，比如固态硬盘和机械硬盘性能肯定不一样，同时机械硬盘，转速不一样性能也不一样</p>
-<p><strong>4、数据容量维度</strong><br>　　① 分布式缓存 hotkey 概率<br>　　② 分布式缓存单 key 大小<br>　　③ 分布式缓存是否能容纳全部的业务数据<br>　　④ 本地缓存是否能全部容纳所有业务的数据<br>　　⑤ DB 中可能会出现多种类型的业务数据，哪种风险高</p>
-<p><strong>5、压测场景或者流量建模</strong><br>　　① 多少用户场景<br>　　② 多少数据场景<br>　　③ 多少业务场景</p>
-<p><strong>6、监控方式及指标确定</strong><br>　　① 压力机端监控<br>　　② 服务端的监控<br>　　③ 给组件的监控</p>
-<h4 id="不同类型的测试策略"><a href="#不同类型的测试策略" class="headerlink" title="不同类型的测试策略"></a>不同类型的测试策略</h4><p>一、调优<br>　1、环境：建议线下，而且只针对单系统或者接口，mock 外部依赖系统，但不要 mock 中间件，但软件的参数配置优先用线上的<br>　2、策略：摸底–找到第一瓶颈—调优对比<br>　3、效果评估方法：服务端承受同样的 qps 压力下的资源占用对比</p>
-<p>二、容量评估<br>　1、环境：建议线上，单接口、单应用、单链路、全链路都如此<br>　2、策略：<br>　　　① 读接口：日常流量放大比例回放；跟进场景人为构造不同参数流量去放大回放<br>　　　② 读链路：日常流量放大比例回放；针对链路中压力不足的单个应用使用补流量的方式使得系统压力符合预期<br>　　　③ 写接口：通过调整集群中某台机器的权重，使其慢慢承担更多该接口的线上真实流量(读写混合)，以便验证其单机能支持多少写 qps<br>　　　④ 写链路：无法生产执行<br>　3、系统全链路容器评估：<br>　　　① 顺序：先单系统评估再全链路评估<br>　　　② 单系统容量评估方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">单系统容量评估方式：</span><br><span class="line">	日常流量能触及单机上限情况：通过调权重的方式压测读写混合流量情况下单机容量*机器数量等到容量A；通过读接口放大比例回放压测整个应用得到容量B，取A和B最小值</span><br><span class="line">	日常流量无法触及单机上限的情况：只能把所有流量打到一台机器上，按比例折算出单机的容量*机器数量等到容量A，通过读接口方式比例回放压测整个应用得到容器B，取A和B最小值</span><br></pre></td></tr></table></figure>
-
-<p>三、稳定性<br>　1、环境：建议线下<br>　2、策略：选择负载最大的链路临界负载 + 脉冲交替持续跑1天后观察各项指标，尤其内存</p>
-<h4 id="压测报告"><a href="#压测报告" class="headerlink" title="压测报告"></a>压测报告</h4><p>　1、背景<br>　2、目的<br>　3、环境部署拓扑<br>　4、参数 &amp; 配置<br>　　　①  软件参数，包括 jvm 和各组件<br>　　　② 硬件配置（所有，包括压力机）<br>　5、各场景过程数据<br>　6、问题及现状（已优化或者无法优化、待优化等）<br>　7、结论：调优的要说明是否有效果；容量和稳定性的要强调是否达标</p>
-<p>注：重点强调，报告中不要有分析过程，只需要过程数据结果及结论</p>
+<p>1、<strong>表字段是否多余</strong></p>
+<p>2、<strong>表字段长度是否合适</strong><br>　① 布尔和枚举建议 tiny<br>　② 日期和时间戳：timestamp 或 int<br>　③ 字符类型：char，text，blob 等建议经量使用符合长度的 varchar(n)<br>　④ 小数和货币：移位转为int或者 decimal<br>　⑤ 小数和货币：移位转为int或者 decimal<br>　⑥ ip 地址：int</p>
+<p>3、<strong>表字段是否需要加密</strong></p>
+<p>4、<strong>表是否需要创建对应索引</strong><br>　① 索引字段的顺序考虑字段的选择性，选择性高的放前面(选择性高：字段不重复)<br>　② 合理使用联合索引，避免多个冗余的单个索<br>　③ 合理利用覆盖索引</p>
+<p>5、<strong>sql 是否能命中合适的索引</strong><br>　如果没有能力静态分析，就依靠线下 sql 分析工具，或者手工做参数替换后拿到线上去做 explain，重点关注 type 和 extra 字段</p>
+<p>6、sql 查询是否只查需要的字段，<strong>禁止select *</strong></p>
+<p>7、sql 未来的增速预估及性能保证方案是否有考虑，比如：<br>　① 垂直拆分：按业务将表拆分到不同的库<br>　② 水平拆分：分表分库<br>　③ <strong>读写分离</strong>：在业务允许的情况下，在从库中读取非实时数据<br>　④ 定时归档<br>　⑤ 缩小查询范围：时间或者业务范围</p>
+<p>8、不建议 sql 使用子查询</p>
+<p>9、不建议 sql 中 join 超过3张表</p>
+<p>10、<strong>模糊查询%要加在后面</strong></p>
+<p>11、模糊查询很多的场景，是否使用 ES 更合理？</p>
+<p>12、注意隐式类型转换的危害</p>
+<p>13、尽量<strong>不在 sql 中做数学运算，函数计算</strong>等</p>
+<p>14、group by 时会默认排序，如果业务没必要排序，建议加 order by null</p>
+<p>15、<strong>禁止使用存储过程，函数、触发器、外键约束</strong></p>
+<p>16、sql 的超时是否需要设置 (一般是100mm，mybatis 设置/数据库连接池)</p>
+<p>17、能不使用事务的，就不要使用事务，优先使用其它方式保证数据一致性</p>
+<p>18、事务的跨度要尽量小</p>
+<p>19、分表分库涉及时，要考虑到<strong>数据分布均匀，避免单库 或 单表数据倾斜</strong></p>
+<p>　<em>上述均为平时工作时的总结，如有错误，望指出</em></p>
 
       
       
@@ -245,7 +237,7 @@
           
           <br>
           <strong>本文链接：</strong>
-          https://yongwei19.github.io/性能测试前要准备些什么？/
+          https://yongwei19.github.io/post/61694c2.html
           <br>
           <strong>版权声明：</strong>
             本文采用
@@ -270,7 +262,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
@@ -283,10 +275,6 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="/categories/工作记录//" class="article-tag-list-link color5">工作记录</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/专项测试//" class="article-tag-list-link color5">专项测试</a>
         		</li>
       		
 		</ul>
@@ -304,18 +292,18 @@
   
 <nav id="article-nav">
   
-    <a href="/Kafka-测试人员要了解的知识点/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/post/439a16d.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Kafka--测试人员要了解的知识点
+          Redis--测试人员要了解的测试点
         
       </div>
     </a>
   
   
-    <a href="/接口用例设计-测试人员要专注哪些点？/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">接口用例设计--测试人员要专注哪些点？</div>
+    <a href="/post/43902f53.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Web安全基础</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -458,7 +446,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -466,19 +454,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">《性能测试30讲》</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">

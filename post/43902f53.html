@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
-  <title>Kafka--测试人员要了解的知识点 | yongwei&#39;s blogs</title>
+  <title>Web安全基础 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Kafka 是基于 zookeeper 协调的分布式日志系统(也可以当做MQ系统)，常见可以用于 web/nginx 日志、访问日志，消息服务等等，主要的应用场景就是日志收集系统和消息系统平时测试的时候，接触 Kafka 其实不多，但还是做了一些了解，现在就站在测试人员的角度，看看要了解kafka哪些内容：">
-<meta name="keywords" content="顾问培训,Kafka">
+  <meta name="description" content="一、Web应用表现形式​    不一定为用户可见页面：各类API接口​    不一定要依托浏览器才能使用： 用爬虫脚本，构造HTTP Request包即可​    不一定需要标准的Web中间件：利用编程语言编写对应处理规则也可实现对用户请求的处理">
+<meta name="keywords" content="安全测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kafka--测试人员要了解的知识点">
-<meta property="og:url" content="https://yongwei19.github.io/Kafka-测试人员要了解的知识点/index.html">
+<meta property="og:title" content="Web安全基础">
+<meta property="og:url" content="https://yongwei19.github.io/post/43902f53.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="Kafka 是基于 zookeeper 协调的分布式日志系统(也可以当做MQ系统)，常见可以用于 web/nginx 日志、访问日志，消息服务等等，主要的应用场景就是日志收集系统和消息系统平时测试的时候，接触 Kafka 其实不多，但还是做了一些了解，现在就站在测试人员的角度，看看要了解kafka哪些内容：">
+<meta property="og:description" content="一、Web应用表现形式​    不一定为用户可见页面：各类API接口​    不一定要依托浏览器才能使用： 用爬虫脚本，构造HTTP Request包即可​    不一定需要标准的Web中间件：利用编程语言编写对应处理规则也可实现对用户请求的处理">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-02T12:30:34.940Z">
+<meta property="og:updated_time" content="2021-06-30T10:53:35.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kafka--测试人员要了解的知识点">
-<meta name="twitter:description" content="Kafka 是基于 zookeeper 协调的分布式日志系统(也可以当做MQ系统)，常见可以用于 web/nginx 日志、访问日志，消息服务等等，主要的应用场景就是日志收集系统和消息系统平时测试的时候，接触 Kafka 其实不多，但还是做了一些了解，现在就站在测试人员的角度，看看要了解kafka哪些内容：">
+<meta name="twitter:title" content="Web安全基础">
+<meta name="twitter:description" content="一、Web应用表现形式​    不一定为用户可见页面：各类API接口​    不一定要依托浏览器才能使用： 用爬虫脚本，构造HTTP Request包即可​    不一定需要标准的Web中间件：利用编程语言编写对应处理规则也可实现对用户请求的处理">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -172,20 +172,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Kafka-测试人员要了解的知识点" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Web安全基础" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Kafka--测试人员要了解的知识点
+      Web安全基础
     </h1>
   
 
         
-        <a href="/Kafka-测试人员要了解的知识点/" class="archive-article-date">
-  	<time datetime="2021-07-02T11:00:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-02</time>
+        <a href="/post/43902f53.html" class="archive-article-date">
+  	<time datetime="2021-06-26T05:14:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-26</time>
 </a>
         
 
@@ -200,18 +200,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>Kafka</strong> 是基于 zookeeper 协调的分布式日志系统(也可以当做MQ系统)，常见可以用于 web/nginx 日志、访问日志，消息服务等等，主要的应用场景就是日志收集系统和消息系统<br>平时测试的时候，接触 Kafka 其实不多，但还是做了一些了解，现在就<strong>站在测试人员的角度，看看要了解kafka哪些内容</strong>：</p>
+        <h5 id="一、Web应用表现形式"><a href="#一、Web应用表现形式" class="headerlink" title="一、Web应用表现形式"></a><strong>一、Web应用表现形式</strong></h5><p>​    不一定为用户可见页面：各类API接口<br>​    不一定要依托浏览器才能使用： 用爬虫脚本，构造HTTP Request包即可<br>​    不一定需要标准的Web中间件：利用编程语言编写对应处理规则也可实现对用户请求的处理</p>
 <a id="more"></a>
 
-<h5 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h5><p>1、<strong>borker：</strong>对应一个 kafka 实例<br>2、<strong>topic：</strong>某一类消息的集合<br>3、<strong>partition：</strong>一个 topic 可以设置为多个 partition，每个 partition 对应一个机器上的物理位置，即文件夹<br>4、<strong>segment：</strong>每个 partition 中的日志可以分为多个小文件，多个小文件拼接成一个完整的 partition。各 segment 都是有序的。一个 segment 可分为两个文件，一个是index、一个是log文件<br>5、<strong>副本：</strong>partition 的数据备份，一个 partition 可以有多个数据备份<br>6、<strong>LSR：</strong>副本同步队列，比如一个partition有两个副本，那就形成一个 leader+2个 follow 这样的 LSR，leader负责这个 partition 的读写操作，follow 负责同步 leader 的数据<br>7、<strong>LEO：</strong>partition  的每个副本的最后一条消息的偏移位置<br>8<strong>、HW：</strong>最高水位，partition 中的副本中LEO最小的作为整个partition的HW，也是consumer能看到的位置<br>9、<strong>repilca.lag.time.max.ms：</strong>当 follower 滞后 leader 数据的时长大于这个值，就会被删除出 LSR，放入 OSP 中，但还是有机会重新进入 LSR 的<br>10、<strong>发送模式</strong><br>　　① 同步：producer.type=sync<br>　　② 异步：producer.type=async<br>11、<strong>AR：</strong>Assigned Replicas，所有的副本(replicas)统称，LSR 是其子集<br>12、<strong>OSR：</strong>因与 leader 进度落差大，并打到了配置的阀值，而被从 LSR 删除出来的副本队列</p>
-<h5 id="二、高可靠性配置"><a href="#二、高可靠性配置" class="headerlink" title="二、高可靠性配置"></a>二、高可靠性配置</h5><p>1、一个partition 可以配置1个以上的数据冗余备份数，通过 offsets.topic.replication.factor 就可以设置一个 partition 对应的副本数<br>2、request_required_acks：<strong>0、1、-1(all)</strong><br>3、min_insync.repilcas：定义在 broker 回复生产者前，需要至少有多少个副本同步了 leader 的数据<br>4、要保证数据写入 Kafka 是安全的、高可靠的，需要如下配置<br>　　① <strong>topic 的配置</strong>：<br>    　　　　replication.factor &gt;= 3，即副本数量至少是3个；<br>    　　　　2 &lt;= min.insync.replicas &lt;= replication.factor<br>　　② <strong>broker 的配置</strong>：leader 的选举条件unclean.leader.election.enable=false<br>　　③ <strong>producer 的配置</strong>：request.required.acks = -1(all)，producer.type=sync</p>
-<h5 id="三、监控"><a href="#三、监控" class="headerlink" title="三、监控"></a>三、监控</h5><p><strong>1、整体监控</strong><br>　　① leader 选举频率<br>　　② zk上kafka/broker/lds 目录下的节点数<br><strong>2、Kafka Broker监控</strong><br>　　① broker 是否存活<br>　　② broker 是否提供服务<br>　　③ 数据流入/流出速度<br>　　④ ISR 收缩频率<br><strong>3、Kafak Controller</strong><br>　　① 存活数<br><strong>4、Kafka Producer 监控</strong><br>　　① producer 队列中排队请求数<br>　　② 请求响应时间<br>　　③ QPS/分钟<br><strong>5、Kafka Consumer监控</strong><br>　　① consumer 队列中排队请求数<br>　　② 请求响应时间<br>　　③ 最近一分钟平均每秒请求数<br><strong>6、Topic监控</strong><br>　　① 数据量大小<br>　　② offset<br>　　③ 数据流入、流入速度、流出速度(message / byte)</p>
-<h5 id="四、重试机制"><a href="#四、重试机制" class="headerlink" title="四、重试机制"></a>四、重试机制</h5><p>Kafka Producer 重试参数retries设置取舍<br>　　① retries = integer.MAX_VALUE<br>　　② max.in.flight.requests.per.connection = 1，如果没设置后面这行，则意味着放弃消息的顺序性</p>
-<h5 id="五、性能压测结果"><a href="#五、性能压测结果" class="headerlink" title="五、性能压测结果"></a>五、性能压测结果</h5><p>1、客户端的 acks 策略对发送的 TPS 有较大的影响，<strong>TPS：acks_o &gt; acks_1 &gt; acks_-1；</strong><br>　　① 副本数越高，TPS越低，副本数一直时min.insync.replicas不影响TPS；<br>　　② acks=0/1 时，TPS与min.insync.replicas参数以及副本数无关，仅受acks策略的影响<br>2、<strong>min.insync.replicas不影响TPS</strong><br>3、partition 的不同会影响 TPS，随着 partition 的个数增长 TPS 会有所增长，但并不是一直成正比关系，到达一定临界值时，partition 数量的增加反而会使TPS略微降低</p>
-<h5 id="六、影响性能的因素"><a href="#六、影响性能的因素" class="headerlink" title="六、影响性能的因素"></a>六、影响性能的因素</h5><p>1、request.required.acks = -1(all) | 0 | 1，producer.type = sync/asyn<br>2、min.insync.replicas<br>3、offset.topic.replication.factor，每个 partition 数量的大小<br>4、消息体大小</p>
-<h5 id="七、风险"><a href="#七、风险" class="headerlink" title="七、风险"></a>七、风险</h5><p>1、<strong>消息乱序</strong><br>　① 只保证 partition 内是有序的，跨 partition 是不保证有序的，partition 数量= 同一个消费者组中消费者数量时，可能需要顺序的数据分布到了不同的 partition，导致处理时乱序。解决：<br>　　1）可以设置 topic 有且只有一个 partition<br>　　2）根据业务需要，需要顺序的指定为同一个 partition<br>　　3）根据业务需要，比如同一个订单，使用同一个key，可以保证分配到同一个partition上<br>　② 即使一个 topic 只有一个 partition，但当顺序的消息进入了同一个消费者组之后，用了多线程来处理消息，会导致消息的乱序。解决：<br>　消费者内部根据线程数量创建等量的内存队列，对于需要顺序的一系列业务数据，根据key或者业务数据，放到同一个内存队列中，然后线程从对应的内存队列中取出并操作<br>2、<strong>消息重复</strong><br>　实现的是 At least once 的传输保证方式，但会有消息重复的风险，依赖于业务方自身去做消息去重</p>
-<p>八、故障演练&amp;模拟</p>
-<p>九、学习文档</p>
+<h5 id="二、Web存在安全隐患的核心问题"><a href="#二、Web存在安全隐患的核心问题" class="headerlink" title="二、Web存在安全隐患的核心问题"></a><strong>二、Web存在安全隐患的核心问题</strong></h5><p>​    1）Web应用类型复杂，防护经验无法复用<br>​    2）Web应用包含的服务组件众多，任意一个组件出现问题都会影响整体的安全程度<br>​    3）由于HTTP协议的特性，<strong>用户端的所有行为均不可信</strong></p>
+<h5 id="三、常见的抓包工具"><a href="#三、常见的抓包工具" class="headerlink" title="三、常见的抓包工具"></a><strong>三、常见的抓包工具</strong></h5><p>​    Wireshark（抓取网卡通信的数据包）<br>​    Burpsuite（利用HTTP代理抓取数据包）<br>​    Fiddler（HTTP代理，效果类似Burpsuite）</p>
+<h5 id="四、URL的基本格式"><a href="#四、URL的基本格式" class="headerlink" title="四、URL的基本格式"></a><strong>四、URL的基本格式</strong></h5><p>​    <strong>scheme：</strong>指定低层使用的协议，如 HTTP/HTTPS 等，目前浏览器默认以HTTP开头<br>​    <strong>host：</strong> HTTP服务器的IP地址或者域名，如 <a href="http://www.XXXXXX.com/" target="_blank" rel="noopener">www.XXXXXX.com/</a> 119.188.50.116<br>​    <strong>port：</strong> 如果不是默认端口，则需注明端口(HTTP默认端口为80；https默认端口为443；端口与域名之间用冒号隔开；8080不是HTTP默认端口，因此必须标明)<br>​    <strong>path：</strong>访问资源的路径，在服务器中以 www 开头的路径，通常表示访问文件的地点<br>​    <strong>query-string：</strong>发送给HTTP服务器的数据；应用GET方式传输才有效；多个数据可用&amp;进行分割，实现多组数</p>
+<h5 id="五、HTTP协议"><a href="#五、HTTP协议" class="headerlink" title="五、HTTP协议"></a><strong>五、HTTP协议</strong></h5><p>​        <strong>请求方式存在的漏洞：</strong>主要使用GET和POST两种方式开展请求，GET和POST请求方式的漏洞：可能因链路劫持而出现参数泄漏；<strong>PUT请求方式的漏洞：</strong>早期ASP系统中存在大量IIS PUT漏洞，导致攻击者可直接利用PUT工具上传木马以获得Webshell</p>
+<p>​    <strong>请求消息报头涉及安全的内容：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host（必须存在）： Host主要用于指定被请求资源的Internet主机和端口号，即标识请求目标。其来源为当前访问的URL。缺省端口号为80，若指定了端口号（以8000为例）进行防卫，则变成 Host:www.a.com:8000。</span><br><span class="line">	Content-Length： 标识当前请求包中的内容长度</span><br><span class="line">	Origin： 用来标识本次请求的发起源、只适用于POST方式</span><br><span class="line">	Referer： 用来标识当前请求的发起页面</span><br><span class="line">	Accept： 用于指定客户端接收哪些类型的信息</span><br><span class="line">	Accept-Encoding： 告知服务器端当前客户端可接受的内容编码</span><br><span class="line">	User-Agent:（简称UA，是必需存在的）： 其中包含当前用户的操作系统、浏览器的基本信息，用于告知Web服务器当前访问者的情况。经常被Web服务器用于统计当前用户状态及行为</span><br></pre></td></tr></table></figure>
+
+<p><strong>请求正文涉及安全的内容：</strong>参数命名应模糊，使得参数名称无法通过表面意思被理解，从而增加攻击者的分析难度<br>响应的类别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1XX表示提示信息，说明请求已被成功接收，继续处理</span><br><span class="line">2XX表示成功，说明请求已被成功接收、理解、接受（200:OK，客户端请求成功；203:Temporarily Moved，页面临时重定向）</span><br><span class="line">3XX表示重定向，要完成请求必须进行更进一步处理（301:Permanently Moved，页面重定向）</span><br><span class="line">4XX表示客户端错误，请求有语法错误或请求无法实现</span><br><span class="line">	400:Bad Request，客户端请求有语法错误，不能被服务器所理解</span><br><span class="line">	401:Unauthorized，请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用</span><br><span class="line">	403:Forbidden，服务器收到请求，但是拒绝提供服务。</span><br><span class="line">	404:Not Found，请求资源不存在，或者请求无法实现。</span><br><span class="line">5XX表示服务器端错误，服务器处理请求时出错。</span><br><span class="line">	500:Internal Server Error，服务器发生不可预期的错误</span><br><span class="line">	503:Server Unavailable，服务器当前不能处理客户端的请求，一段时间</span><br></pre></td></tr></table></figure>
+
+<p>响应消息报头：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Server Server响应报头域包含服务器用来处理请求的软件信息</span><br><span class="line">Server:Apache，用来告知用户端提供本次响应的服务器端采用的中间件是Apache</span><br><span class="line">X-Powered-By 用来标识实现当前Web站点所采用的语言及版本号</span><br><span class="line">Set-cookie 根据响应包生成Cookie，并提供给客户端。</span><br><span class="line">Content-Length 与请求包中的用法相同，用以标识当前响应包中的内容长度。</span><br></pre></td></tr></table></figure>
+
+<p>HTTP协议涉及的安全问题：HTTP协议在传输内容时并没有采取任何加密措施，可利用网络抓包方法来直接获得HTTP包的内容，利用爆破等手段获得用户的敏感内容</p>
+<h5 id="六、HTTPS-协议"><a href="#六、HTTPS-协议" class="headerlink" title="六、HTTPS 协议"></a><strong>六、HTTPS 协议</strong></h5><p>在 HTTP协 议基础上，利用 SSL 技术进行数据包的传输，避免传输内容在链路中被劫持，保障用户传输中的数据不被窃听。在安全传输反面，采用<strong>加密算法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">对称加密：服务器端和客户端使用相同的密钥来对信息进行加密与解密；处理速度非常快</span><br><span class="line">非对称加密：客户端具有公钥，用来对数据进行加密，并且公钥可以公开传输，服务器端具有私钥，用于对用户的数据解密(建立安全通道时可利用非对称加密方式实现)</span><br><span class="line"></span><br><span class="line">当用户利用HTTPS协议访问Web站点时，Web站点会向用户发送其加密算法的公钥。用户根据公钥对数据进行加密，从而实现建立安全通道的基础需求；验证站点发送的公钥是否真实；</span><br></pre></td></tr></table></figure>
+
+<p>根据其认证次数可分 <strong>单向认证、双向认证</strong>，单向认证的主要流程如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1）客户端向服务器发起请求，其中包含各种SSL参数，并从服务器端拿到证书。</span><br><span class="line">2）客户端将从服务器端获得的证书提交至CA, CA验证该证书的合法性并告知客户端，客户端根据CA验证结果来确认目标站点的真实性</span><br><span class="line">3）从服务器端的证书中取出公钥，利用公钥对客户端产生的密钥加密（对称密钥），并利用公钥将加密后的密钥发送到服务器端。</span><br><span class="line">4）服务器端用其私钥解密出数据，即得到客户端发送来的对称密钥，之后均利用这个对称密钥对传输文件进行加密/解密。</span><br></pre></td></tr></table></figure>
+
+<p>但单向认证有一定的漏洞风险，不过也有应对措施：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SSL剥离攻击是针对HTTPS单向认证环境的攻击手段</span><br><span class="line">	SSL剥离攻击常用于WiFi劫持、ISP层面的流量劫持等环境</span><br><span class="line">	经常访问的站点突然由HTTPS协议变成了HTTP协议，那么就需格外小心</span><br><span class="line">	这类劫持行为对用户的数据会产生较大的危害，同时也会危害到网站的利益</span><br><span class="line">	</span><br><span class="line">应对：在大型站点的高价值业务或者两个站点互联互通时均会利用HTTPS双向验证技术来解决上述安全隐患。</span><br></pre></td></tr></table></figure>
+
+<p>双向认证的主要流程如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1）客户端向服务器发起请求，其中包含各种SSL参数，并从服务器端拿到证书。</span><br><span class="line">2）客户端将从服务器端获得的证书提交至CA, CA验证该证书的合法性并告知客户端，客户端根据CA验证结果来确认目标站点的真实性。</span><br><span class="line">	双方利用对方公钥加密来协商可支持的传输类型及密码方案。</span><br><span class="line">	服务器端要求客户端发送证书并验证，并接受用户的公钥。</span><br><span class="line">3）客户端从服务器端的证书中取出公钥，利用公钥对客户端产生的密钥加密（对称密钥），并利用公钥将加密后的密钥发送到服务器端。</span><br><span class="line">4）服务器端用私钥解密出数据，即得到客户端发送来的对称密钥，之后所有内容均利用这个对称密钥对传输文件进行加密/解密。</span><br><span class="line"></span><br><span class="line">双向认证的优点：增加了服务器对客户端的合法性校验</span><br><span class="line">双向认证的前提： 由于客户端没有针对特定网站的密钥生成机制，因此在双向认证时站点会要求客户端安装特定的插件</span><br><span class="line">双向认证的适用场景：并不适用于全部的场景、只是在传输过程中利用SSL/TLS技术进行加密、 有效避免来自运营商层面的TCP劫持、主要防护传输过程中的安全</span><br></pre></td></tr></table></figure>
+
+<p>HTTPS 协议的优点：解决的是传输过程中的安全问题，可用来保障客户端的传输数据安全<br>HTTPS 协议的局限：并不会直接提升Web站点的安全性</p>
+<h5 id="七、Web应用中的编码与加密"><a href="#七、Web应用中的编码与加密" class="headerlink" title="七、Web应用中的编码与加密"></a><strong>七、Web应用中的编码与加密</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">针对字符的编码：</span><br><span class="line">	单字节编码：8bit只能提供256个编码定义，	常用ASCII编码</span><br><span class="line">	双字节编码：两个8bit，可支持65536个汉字	；常用GBK、GB2312	</span><br><span class="line">	查看方式：利用Chrome浏览器观察各种编码的效果、 Set Character Encoding 插件 指定编码格式	</span><br><span class="line"></span><br><span class="line">传输过程的编码--URL</span><br><span class="line">	允许包含英文字母（a～z、A～Z）、数字（0～9）、4个特殊字符（-、_、.、～）以及所有保留字符	</span><br><span class="line">	还带有单引号、百分号、中文等(实际Web应用中所使用的字符)</span><br><span class="line">	主体采用的是ASCII编码表</span><br><span class="line">	编码方式：用%（百分号）加上两位字符代表一个字节(例如，单引号在ASCII中的十六进制编码为27，在URL编码中就是%27)</span><br><span class="line">	对中文字符的编码：先将其转换成当前页面所用的编码格式，然后在每个字符的每一组编码前添加%</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">对中文字符编码的举例：</span><br><span class="line">例如，当前页面使用utf-8编码 则在url编码前连接为 HTTP://172.29.152.23/loginPage.jsp?name=测试&amp;passwd=ww121%$ </span><br><span class="line">则“测试”字符的UTF-8编码，其十六进制编码就是“E6 B5 8B E8 AF 95”</span><br><span class="line">进行url编码后变为：HTTP://172.29.152.23/loginPage.jsp?name=%E6%B5%8B%E8%AF%95&amp;passwd=ww121%25$</span><br></pre></td></tr></table></figure>
+
+<p>Web系统中的加密措施</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">标准的加密方法：对用户提交的参数（如密码、特定内容等）进行加密后再传输，避免参数在传输过程中被劫持</span><br><span class="line">不需要服务器知道明文的内容：用户的隐私信息、不直接存储密码明文、利用MD5/SHA-1实现加密、信息摘要算法、 转换成长度固定的密文；针对相同内容每次执行算法得到的密文完全相同</span><br><span class="line">需要服务器知道明文的内容：</span><br><span class="line">	HTTP协议传输过程中不会对其中的内容加密，导致在传输过程中内容被抓包</span><br><span class="line">	在HTTP下保障传输安全，采用对称加密(如AES方式等)，但需要考虑加密算法的单次持续时间及重复程度、优化整体业务流程，从根本上降低需要加密传参的业务数量、利用JS混淆技术来提升加密算法的安全性</span><br></pre></td></tr></table></figure>
+
 
       
       
@@ -226,7 +251,7 @@
           
           <br>
           <strong>本文链接：</strong>
-          https://yongwei19.github.io/Kafka-测试人员要了解的知识点/
+          https://yongwei19.github.io/post/43902f53.html
           <br>
           <strong>版权声明：</strong>
             本文采用
@@ -247,11 +272,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">顾问培训</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kafka</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全测试</a>
         		</li>
       		
 		</ul>
@@ -263,7 +284,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/工作记录//" class="article-tag-list-link color5">工作记录</a>
+        			<a href="/categories/专项测试//" class="article-tag-list-link color5">专项测试</a>
         		</li>
       		
 		</ul>
@@ -281,9 +302,18 @@
   
 <nav id="article-nav">
   
+    <a href="/post/61694c2.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          MySQL--测试人员要了解的测试点
+        
+      </div>
+    </a>
   
-    <a href="/性能测试前要准备些什么？/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">性能测试前要准备些什么？</div>
+  
+    <a href="/post/988fc685.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初识AB测试</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -426,7 +456,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -434,19 +464,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">《性能测试30讲》</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">

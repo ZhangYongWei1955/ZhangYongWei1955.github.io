@@ -6,27 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
-  <title>并发用户数的计算 | yongwei&#39;s blogs</title>
+  <title>Kafka--测试人员要了解的知识点 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了">
-<meta name="keywords" content="《性能测试30讲》">
+  <meta name="description" content="Kafka 是基于 zookeeper 协调的分布式日志系统(也可以当做MQ系统)，常见可以用于 web/nginx 日志、访问日志，消息服务等等，主要的应用场景就是日志收集系统和消息系统平时测试的时候，接触 Kafka 其实不多，但还是做了一些了解，现在就站在测试人员的角度，看看要了解kafka哪些内容：">
+<meta name="keywords" content="Kafka,顾问培训">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并发用户数的计算">
-<meta property="og:url" content="https://yongwei19.github.io/并发用户数的计算/index.html">
+<meta property="og:title" content="Kafka--测试人员要了解的知识点">
+<meta property="og:url" content="https://yongwei19.github.io/post/57565.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了">
+<meta property="og:description" content="Kafka 是基于 zookeeper 协调的分布式日志系统(也可以当做MQ系统)，常见可以用于 web/nginx 日志、访问日志，消息服务等等，主要的应用场景就是日志收集系统和消息系统平时测试的时候，接触 Kafka 其实不多，但还是做了一些了解，现在就站在测试人员的角度，看看要了解kafka哪些内容：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://yongwei19.github.io/并发用户数的计算/1612526703(1).jpg">
-<meta property="og:image" content="https://yongwei19.github.io/并发用户数的计算/1612526866(1).jpg">
-<meta property="og:image" content="https://yongwei19.github.io/并发用户数的计算/1612527394(1).jpg">
-<meta property="og:image" content="https://yongwei19.github.io/并发用户数的计算/1612527476(1).jpg">
-<meta property="og:image" content="https://yongwei19.github.io/并发用户数的计算/1612527926(1).jpg">
-<meta property="og:image" content="https://yongwei19.github.io/并发用户数的计算/1612529647(1).jpg">
-<meta property="og:updated_time" content="2021-06-28T13:02:15.874Z">
+<meta property="og:updated_time" content="2021-07-02T12:30:34.940Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发用户数的计算">
-<meta name="twitter:description" content="不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了">
-<meta name="twitter:image" content="https://yongwei19.github.io/并发用户数的计算/1612526703(1).jpg">
+<meta name="twitter:title" content="Kafka--测试人员要了解的知识点">
+<meta name="twitter:description" content="Kafka 是基于 zookeeper 协调的分布式日志系统(也可以当做MQ系统)，常见可以用于 web/nginx 日志、访问日志，消息服务等等，主要的应用场景就是日志收集系统和消息系统平时测试的时候，接触 Kafka 其实不多，但还是做了一些了解，现在就站在测试人员的角度，看看要了解kafka哪些内容：">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -179,20 +172,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-并发用户数的计算" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Kafka-测试人员要了解的知识点" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      并发用户数的计算
+      Kafka--测试人员要了解的知识点
     </h1>
   
 
         
-        <a href="/并发用户数的计算/" class="archive-article-date">
-  	<time datetime="2021-02-03T13:42:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-03</time>
+        <a href="/post/57565.html" class="archive-article-date">
+  	<time datetime="2021-07-02T11:00:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-02</time>
 </a>
         
 
@@ -207,30 +200,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了</strong></p>
+        <p><strong>Kafka</strong> 是基于 zookeeper 协调的分布式日志系统(也可以当做MQ系统)，常见可以用于 web/nginx 日志、访问日志，消息服务等等，主要的应用场景就是日志收集系统和消息系统<br>平时测试的时候，接触 Kafka 其实不多，但还是做了一些了解，现在就<strong>站在测试人员的角度，看看要了解kafka哪些内容</strong>：</p>
 <a id="more"></a>
 
-<p>绝对并发指的是同一时刻的并发数；相对并发指的是一个时间段内发生的事情</p>
-<h4 id="什么是并发？"><a href="#什么是并发？" class="headerlink" title="什么是并发？"></a>什么是并发？</h4><p><img src="/并发用户数的计算/1612526703(1).jpg" alt="1612526703(1)"><br>假设上图中的这些小人是严格按照这个逻辑到达系统的，那显然，系统的绝对并发用户数是 4。如果描述 1 秒内的并发用户数，那就是 16<br>但是，在实际的系统中，用户通常是这样分配的：<br><img src="/并发用户数的计算/1612526866(1).jpg" alt="1612526866(1)"><br>用户会分布在系统中不同的服务、网络等对象中，”绝对并发“的概念就很难描述了<br>这时建议用 TPS 来承载“并发”这个概念，并发数是 16TPS，就是 1 秒内整个系统处理了 16 个事务</p>
-<h4 id="在线用户数、并发用户数怎么计算"><a href="#在线用户数、并发用户数怎么计算" class="headerlink" title="在线用户数、并发用户数怎么计算"></a>在线用户数、并发用户数怎么计算</h4><p><img src="/并发用户数的计算/1612527394(1).jpg" alt="1612527394(1)"><br>如上图所示，总共有 32 个用户进入了系统，但是绿色的用户并没有任何动作，那么显然，在线用户数是 32 个，并发用户数是 16 个，这时的并发度就是 50%<br>但是在系统中，往往是这样的：<br><img src="/并发用户数的计算/1612527476(1).jpg" alt="1612527476(1)"><br>为了能 hold 住更多的用户，通常都会把一些数据放到 Redis 这样的缓存服务器中。所以在线用户数怎么算呢，如果仅从上面这种简单的图来看的话，其实就是缓存服务器能有多大，能 hold 住多少用户需要的数据<br>假设一个用户进入系统之后，需要用 10k 内存来维护一个用户的信息，那么 10G 的内存就能 hold 住 1,048,576 个用户的数据，这就是<strong>最大在线用户数</strong>了<br>但并发用户数不同，他们需要在系统中执行某个动作。我们要测试的重中之重，就是统计这些正在执行动作的并发用户数。当我们统计生产环境中的在线用户数时，并发用户数也是要同时统计的。这里会涉及到一个概念：<strong>并发度</strong><br><img src="/并发用户数的计算/1612527926(1).jpg" alt="1612527926(1)"><br>通过这个图，我们可以看到一个简单的计算逻辑：<br>　1、如果有 10000 个在线用户数，同时并发度是 1%，那显然并发用户数就是 100<br>　2、如果每个线程的 20TPS，显然只需要 5 个线程就够了（这里说的线程指的是压力机的线程数）<br>　3、这时对 Server 来说，它处理的就是 100TPS，平均响应时间是 50ms (50ms = (1s/20TPS * 5)/5)<br>　4、如果我们有两个 Server 线程来处理，那么一个线程就是 50TPS<br>　5、有一个转换的细节，那就是<strong>并发用户数到压力机的并发线程数</strong><br>　而我们通常说的“并发”这个词，依赖 TPS 来承载的时候，指的都是 Server 端的处理能力，并不是压力工具上的并发线程数。在上面的例子中，我们说的并发就是指服务器上 100TPS 的处理能力，而不是指 5 个压力机的并发线程数<br><strong>不要在意你用的是什么压力工具，只要在意你服务端的处理能力就可以了</strong></p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>JMeter（1 个线程） - Nginx - Tomcat - MySQL ，来看看 JMeter 的处理情况：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">summary +   5922 in 00:00:30 =  197.4/s Avg:     4 Min:     0 Max:    26 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  35463 in 00:03:05 =  192.0/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br><span class="line">summary +   5922 in 00:00:30 =  197.5/s Avg:     4 Min:     0 Max:    24 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  41385 in 00:03:35 =  192.8/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br><span class="line">summary +   5808 in 00:00:30 =  193.6/s Avg:     5 Min:     0 Max:    25 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0</span><br><span class="line">summary =  47193 in 00:04:05 =  192.9/s Avg:     5 Min:     0 Max:   147 Err:     0 (0.00%)</span><br></pre></td></tr></table></figure>
-
-<p>JMeter 的平均响应时间基本都在 5ms，因为只有一个压力机线程，所以它的 TPS 应该接近1000ms/5ms=200TPS<br>但是服务端并没有一直干活，很多是空闲的<br>　1、并发用户数（TPS）是 193.6TPS。如果并发度为 5%，在线用户数就是 193.6/5%=3872<br>　2、响应时间是 5ms<br>　3、压力机并发线程数是 1</p>
-<p>换一个场景，在压力机上启动 10 个线程。结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">summary +  11742 in 00:00:30 =  391.3/s Avg:    25 Min:     0 Max:   335 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  55761 in 00:02:24 =  386.6/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br><span class="line">summary +  11924 in 00:00:30 =  397.5/s Avg:    25 Min:     0 Max:    80 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  67685 in 00:02:54 =  388.5/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br><span class="line">summary +  11884 in 00:00:30 =  396.2/s Avg:    25 Min:     0 Max:   240 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0</span><br><span class="line">summary =  79569 in 00:03:24 =  389.6/s Avg:    25 Min:     0 Max:   346 Err:     0 (0.00%)</span><br></pre></td></tr></table></figure>
-
-<p>平均响应时间在 25ms，我们来计算一处，TPS = (1000ms/25ms)*10=400TPS。这时服务端线程就忙多了：<br><img src="/并发用户数的计算/1612529647(1).jpg" alt="1612529647(1)"></p>
-<p>　1、并发用户数（TPS）是 396.2TPS。如果并发度为 5%，在线用户数就是 396.2/5%=7924<br>　2、响应时间是 25ms<br>　3、压力机并发线程数是 10<br>如果要有公式的话，这个计算公式将非常简单:<strong>TPS=1000ms/响应时间(单位ms) ∗ 压力机线程数</strong><br>对于压力工具来说，只要不报错，我们就关心 TPS 和响应时间就可以了，因为 TPS 反应出来的是和服务器对应的处理能力，至少压力线程数是多少，并不关键</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>　1、通常所说的并发都是指服务端的并发，而不是指压力机上的并发线程数<br>　2、性能中常说的并发，是用 TPS 这样的概念来承载具体数值的<br>　3、压力工具中的线程数、响应时间和 TPS 之间是有对应关系的</p>
+<h5 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h5><p>1、<strong>borker：</strong>对应一个 kafka 实例<br>2、<strong>topic：</strong>某一类消息的集合<br>3、<strong>partition：</strong>一个 topic 可以设置为多个 partition，每个 partition 对应一个机器上的物理位置，即文件夹<br>4、<strong>segment：</strong>每个 partition 中的日志可以分为多个小文件，多个小文件拼接成一个完整的 partition。各 segment 都是有序的。一个 segment 可分为两个文件，一个是index、一个是log文件<br>5、<strong>副本：</strong>partition 的数据备份，一个 partition 可以有多个数据备份<br>6、<strong>LSR：</strong>副本同步队列，比如一个partition有两个副本，那就形成一个 leader+2个 follow 这样的 LSR，leader负责这个 partition 的读写操作，follow 负责同步 leader 的数据<br>7、<strong>LEO：</strong>partition  的每个副本的最后一条消息的偏移位置<br>8<strong>、HW：</strong>最高水位，partition 中的副本中LEO最小的作为整个partition的HW，也是consumer能看到的位置<br>9、<strong>repilca.lag.time.max.ms：</strong>当 follower 滞后 leader 数据的时长大于这个值，就会被删除出 LSR，放入 OSP 中，但还是有机会重新进入 LSR 的<br>10、<strong>发送模式</strong><br>　　① 同步：producer.type=sync<br>　　② 异步：producer.type=async<br>11、<strong>AR：</strong>Assigned Replicas，所有的副本(replicas)统称，LSR 是其子集<br>12、<strong>OSR：</strong>因与 leader 进度落差大，并打到了配置的阀值，而被从 LSR 删除出来的副本队列</p>
+<h5 id="二、高可靠性配置"><a href="#二、高可靠性配置" class="headerlink" title="二、高可靠性配置"></a>二、高可靠性配置</h5><p>1、一个partition 可以配置1个以上的数据冗余备份数，通过 offsets.topic.replication.factor 就可以设置一个 partition 对应的副本数<br>2、request_required_acks：<strong>0、1、-1(all)</strong><br>3、min_insync.repilcas：定义在 broker 回复生产者前，需要至少有多少个副本同步了 leader 的数据<br>4、要保证数据写入 Kafka 是安全的、高可靠的，需要如下配置<br>　　① <strong>topic 的配置</strong>：<br>    　　　　replication.factor &gt;= 3，即副本数量至少是3个；<br>    　　　　2 &lt;= min.insync.replicas &lt;= replication.factor<br>　　② <strong>broker 的配置</strong>：leader 的选举条件unclean.leader.election.enable=false<br>　　③ <strong>producer 的配置</strong>：request.required.acks = -1(all)，producer.type=sync</p>
+<h5 id="三、监控"><a href="#三、监控" class="headerlink" title="三、监控"></a>三、监控</h5><p><strong>1、整体监控</strong><br>　　① leader 选举频率<br>　　② zk上kafka/broker/lds 目录下的节点数<br><strong>2、Kafka Broker监控</strong><br>　　① broker 是否存活<br>　　② broker 是否提供服务<br>　　③ 数据流入/流出速度<br>　　④ ISR 收缩频率<br><strong>3、Kafak Controller</strong><br>　　① 存活数<br><strong>4、Kafka Producer 监控</strong><br>　　① producer 队列中排队请求数<br>　　② 请求响应时间<br>　　③ QPS/分钟<br><strong>5、Kafka Consumer监控</strong><br>　　① consumer 队列中排队请求数<br>　　② 请求响应时间<br>　　③ 最近一分钟平均每秒请求数<br><strong>6、Topic监控</strong><br>　　① 数据量大小<br>　　② offset<br>　　③ 数据流入、流入速度、流出速度(message / byte)</p>
+<h5 id="四、重试机制"><a href="#四、重试机制" class="headerlink" title="四、重试机制"></a>四、重试机制</h5><p>Kafka Producer 重试参数retries设置取舍<br>　　① retries = integer.MAX_VALUE<br>　　② max.in.flight.requests.per.connection = 1，如果没设置后面这行，则意味着放弃消息的顺序性</p>
+<h5 id="五、性能压测结果"><a href="#五、性能压测结果" class="headerlink" title="五、性能压测结果"></a>五、性能压测结果</h5><p>1、客户端的 acks 策略对发送的 TPS 有较大的影响，<strong>TPS：acks_o &gt; acks_1 &gt; acks_-1；</strong><br>　　① 副本数越高，TPS越低，副本数一直时min.insync.replicas不影响TPS；<br>　　② acks=0/1 时，TPS与min.insync.replicas参数以及副本数无关，仅受acks策略的影响<br>2、<strong>min.insync.replicas不影响TPS</strong><br>3、partition 的不同会影响 TPS，随着 partition 的个数增长 TPS 会有所增长，但并不是一直成正比关系，到达一定临界值时，partition 数量的增加反而会使TPS略微降低</p>
+<h5 id="六、影响性能的因素"><a href="#六、影响性能的因素" class="headerlink" title="六、影响性能的因素"></a>六、影响性能的因素</h5><p>1、request.required.acks = -1(all) | 0 | 1，producer.type = sync/asyn<br>2、min.insync.replicas<br>3、offset.topic.replication.factor，每个 partition 数量的大小<br>4、消息体大小</p>
+<h5 id="七、风险"><a href="#七、风险" class="headerlink" title="七、风险"></a>七、风险</h5><p>1、<strong>消息乱序</strong><br>　① 只保证 partition 内是有序的，跨 partition 是不保证有序的，partition 数量= 同一个消费者组中消费者数量时，可能需要顺序的数据分布到了不同的 partition，导致处理时乱序。解决：<br>　　1）可以设置 topic 有且只有一个 partition<br>　　2）根据业务需要，需要顺序的指定为同一个 partition<br>　　3）根据业务需要，比如同一个订单，使用同一个key，可以保证分配到同一个partition上<br>　② 即使一个 topic 只有一个 partition，但当顺序的消息进入了同一个消费者组之后，用了多线程来处理消息，会导致消息的乱序。解决：<br>　消费者内部根据线程数量创建等量的内存队列，对于需要顺序的一系列业务数据，根据key或者业务数据，放到同一个内存队列中，然后线程从对应的内存队列中取出并操作<br>2、<strong>消息重复</strong><br>　实现的是 At least once 的传输保证方式，但会有消息重复的风险，依赖于业务方自身去做消息去重</p>
+<p>八、故障演练&amp;模拟</p>
+<p>九、学习文档</p>
 
       
       
       <!-- 添加底部版权声明 -->
       
       
-        <div class="declare" hidden="hidden"></div>
-        
+        <div class="declare">
+          <br><br>
+          <strong>本文作者：</strong>
+          
+            鸡肉味·嘎嘣脆
+          
+          <br>
+          <strong>本文链接：</strong>
+          https://yongwei19.github.io/post/57565.html
+          <br>
+          <strong>版权声明：</strong>
+            本文采用
+          <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+            进行许可。转载请注明出处！
+          
+        </div>
+      
       <!-- 添加底部版权声明结束 -->
 
       
@@ -243,7 +247,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">《性能测试30讲》</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kafka</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">顾问培训</a>
         		</li>
       		
 		</ul>
@@ -255,7 +263,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/读书笔记//" class="article-tag-list-link color5">读书笔记</a>
+        			<a href="/categories/工作记录//" class="article-tag-list-link color5">工作记录</a>
         		</li>
       		
 		</ul>
@@ -273,18 +281,9 @@
   
 <nav id="article-nav">
   
-    <a href="/初识AB测试/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          初识AB测试
-        
-      </div>
-    </a>
   
-  
-    <a href="/TPS和响应时间的关系/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">TPS和响应时间的关系</div>
+    <a href="/post/20427.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">性能测试前要准备些什么？</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -427,7 +426,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -435,19 +434,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">《性能测试30讲》</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
