@@ -6,19 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://yongwei19.github.io">
-  <title>Archives: 2019/9 | yongwei&#39;s blogs</title>
+  <title>流量回放工具Diffy介绍及在项目中的应用 | yongwei&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录个人笔记">
-<meta name="keywords" content="个人笔记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yongwei&#39;s blogs">
-<meta property="og:url" content="https://yongwei19.github.io/archives/2019/09/index.html">
+  <meta name="description" content="如何在有限的时间和人力成本投入下，还能有效、高效的保证产品回归测试的质量？今天的主角 Diffy 则提供了较好的解决方案。它基于稳定版本和它副本的输出，对候选版本的输出进行严格对比，以检查候选版本是否正确，大大降低了回归工作量">
+<meta name="keywords" content="流量回放,Diffy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流量回放工具Diffy介绍及在项目中的应用">
+<meta property="og:url" content="https://yongwei19.github.io/blog/e08ca5f7.html">
 <meta property="og:site_name" content="yongwei&#39;s blogs">
-<meta property="og:description" content="记录个人笔记">
+<meta property="og:description" content="如何在有限的时间和人力成本投入下，还能有效、高效的保证产品回归测试的质量？今天的主角 Diffy 则提供了较好的解决方案。它基于稳定版本和它副本的输出，对候选版本的输出进行严格对比，以检查候选版本是否正确，大大降低了回归工作量">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627298915.jpg">
+<meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627300134.jpg">
+<meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627300196(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627300310(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627300467(1).jpg">
+<meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627300523(1).jpg">
+<meta property="og:updated_time" content="2021-07-26T12:15:38.259Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yongwei&#39;s blogs">
-<meta name="twitter:description" content="记录个人笔记">
+<meta name="twitter:title" content="流量回放工具Diffy介绍及在项目中的应用">
+<meta name="twitter:description" content="如何在有限的时间和人力成本投入下，还能有效、高效的保证产品回归测试的质量？今天的主角 Diffy 则提供了较好的解决方案。它基于稳定版本和它副本的输出，对候选版本的输出进行严格对比，以检查候选版本是否正确，大大降低了回归工作量">
+<meta name="twitter:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627298915.jpg">
   
     <link rel="alternative" href="/atom.xml" title="yongwei&#39;s blogs" type="application/atom+xml">
   
@@ -171,71 +179,238 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-流量回放工具Diffy介绍及在项目中的应用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/41c3a9fb.html" class="archive-article-date">
-  	<time datetime="2019-09-28T08:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/41c3a9fb.html">《软件测试》读书笔记</a>
+    <h1 class="article-title" itemprop="name">
+      流量回放工具Diffy介绍及在项目中的应用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/blog/e08ca5f7.html" class="archive-article-date">
+  	<time datetime="2021-07-26T11:11:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-26</time>
+</a>
+        
+
+        <!-- 添加不蒜子统计文章访问量 -->
+      
+        <span class="archive-article-date">
+          阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
+      
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何在<strong>有限的时间和人力成本投入下</strong>，还能有效、高效的保证产品回归测试的质量？今天的主角 <strong>Diffy</strong> 则提供了较好的解决方案。它基于稳定版本和它副本的输出，对候选版本的输出进行严格对比，以检查候选版本是否正确，<strong>大大降低了回归工作量</strong></p>
+<a id="more"></a>
+
+<h3 id="Diffy-介绍"><a href="#Diffy-介绍" class="headerlink" title="Diffy 介绍"></a><strong>Diffy 介绍</strong></h3><h5 id="一、Diffy-是什么"><a href="#一、Diffy-是什么" class="headerlink" title="一、Diffy 是什么"></a><strong>一、Diffy 是什么</strong></h5><p>Diffy 是 Twitter 的一个开源自动化测试工具，是一种 Diff 测试技术。Diffy 通过同时新代码和旧代码的实例，对比运行结果来发现服务中的潜在错误。<br><strong>Diffy 充当代理</strong>并将它收到的任何请求多播到每个正在运行的实例</p>
+<h5 id="二、Diffy-解决什么问题？"><a href="#二、Diffy-解决什么问题？" class="headerlink" title="二、Diffy 解决什么问题？"></a><strong>二、Diffy 解决什么问题？</strong></h5><p>随着项目的迭代，产品功能不断增加，项目会变得越来越复杂；而从质量保障的角度，除了要保障好每次新增、优化的产品质量外，还需要确认新增或修改的功能不影响之前已存在的功能。若要进行产品功能全量回归，这个测试的工作量将会非常巨大。<br>因此 Diffy 提供了较好的解决方案，它基于稳定版本和它副本的输出，对候选版本的输出进行严格对比，以检查候选版本是否正确，大大降低了回归工作量</p>
+<h5 id="三、Diffy-工作原理"><a href="#三、Diffy-工作原理" class="headerlink" title="三、Diffy 工作原理"></a><strong>三、Diffy 工作原理</strong></h5><p>Diffy 充当代理，它能够<strong>将来源请求分发到三个不同的服务实例中</strong>，通过对各个版本系统的输出进行对比，做出最终的结论。整个运行流程为：</p>
+<img src="/blog/e08ca5f7/1627298915.jpg">
+
+<p>Diffy需要三个版本的实例，以实现它的噪声过滤和对比功能，它们分别是：<br>　　<strong>1、候选版本(candidate)：</strong>该版本是待测版本，相对于生产环境版本有着更新的代码<br>　　<strong>2、稳定版本(primary)：</strong>该版本通常是已经上线版本，或者是已知功能正常的版本<br>　　<strong>3、稳定版本副本(secondary)：</strong>该版本是稳定版本的副本，和稳定版本运行相同的代码，主要用于排除噪声<br>如上图所示，Diffy能够比较 primary(线上稳定版本) 和 secondary(线上稳定版本备份) 的差异值，通过对这些差异值做减法来确定接口的噪声(比如时间戳、随机ID等)；<br>通过比较 candidate(测试版本) 和 primary(线上稳定版本) 得到基本的 diff 结果；最后通过比对<strong>【基本的 diff 结果】与【消除噪声后的结果】</strong>，得到最终的diff结果</p>
+<p>其中：<br>　　<strong>原始区别：</strong>为候选版本 和 稳定版本之间输出的区别，其中可能会包含噪声<br>　　<strong>噪声：</strong>从稳定版本 和 其副本中获得，如果两个运行相同代码的系统输入相同输出却不同，则 Diffy 会认为这是开发人员不需要关心的噪声(比如时间戳、随机ID等)<br>　　基于上述两个区别集合，Diffy可以识别出 候选版本 和 稳定版本 真实的区别，这些区别很有可能就是一个缺陷</p>
+<p>当然，对于一个概率性出现随机值，仅仅一次请求的结论可能是不准确的。例如：<br>对于一个 50% 概率出现true或者false的布尔值，则有50%的概率会出现候选版本和稳定版本的不同，同时又会有50%的概率出现稳定版本和其副本出现不同（即将这个值认定为噪声），最终会有25%的概率认为这是一个缺陷。因为此时稳定版本和其副本值相同，候选版本和稳定版本值不同。因此，Diffy还会聚合原始区别和噪声，当发现二者出现的概率类似的时候，会认定之前识别出来的缺陷属于误报</p>
+<h5 id="四、Diffy-的安装与部署"><a href="#四、Diffy-的安装与部署" class="headerlink" title="四、Diffy 的安装与部署"></a><strong>四、Diffy 的安装与部署</strong></h5><p><strong>1、拉取代码并构建</strong><br>　前3个部分简单介绍了 Diffy 的作用和原理，了解了 Diffy介绍 的作用和原理后，可以将 Diffy 工具的源码拉到服务器中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/twitter/diffy.git</span><br></pre></td></tr></table></figure>
+
+<p>代码拉取完成后，进入到 diffy 目录后，使用 ./sbt assembly 进行构建。但需要注意，windows下会构建失败<br>构建完成后，在 diffy/target/scala-xx/diffy-server.jar 下就能找到可执行jar包<br>其实构建的目的就是为了获取可执行的jar包，我这里已经有构建好的，可以直接下载并上传服务器即可直接使用：<a href="https://store-g1.seewo.com/seewoedu_pub_170b869943814fd89eda9cbc7f817ec7()下载后修改一下文件名" target="_blank" rel="noopener">diffy-server.jar</a></p>
+<p><strong>2、部署 diffy 服务</strong><br>有 jar 包后，可以运行 jar 包并初始化一些diffy命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">java -jar diffy-server.jar</span><br><span class="line">-candidate=localhost:9992</span><br><span class="line">-master.primary=localhost:9990</span><br><span class="line">-master.secondary=localhost:9991</span><br><span class="line">-service.protocol=http</span><br><span class="line">-serviceName=My-Service</span><br><span class="line">-proxy.port=:8880</span><br><span class="line">-admin.port=:8881</span><br><span class="line">-http.port=:8888</span><br><span class="line">-rootUrl=&apos;localhost:8888&apos;</span><br><span class="line">-summary.email=zxxx@xxx.com</span><br></pre></td></tr></table></figure>
+
+<p>相关参数介绍：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数配置</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">java -jar diffy-server.jar</td>
+<td align="left">jar包路径进行运行</td>
+</tr>
+<tr>
+<td align="left"><strong>candidate</strong>=localhost:9992</td>
+<td align="left">待上线版本部署地址，即候选版本</td>
+</tr>
+<tr>
+<td align="left">master.<strong>primary</strong>=localhost:9990</td>
+<td align="left">已上线版本地址 1，即稳定版本</td>
+</tr>
+<tr>
+<td align="left">master.<strong>secondary</strong>=localhost:9991</td>
+<td align="left">已上线版本地址 2，即稳定版本副本</td>
+</tr>
+<tr>
+<td align="left">service.protocol=http</td>
+<td align="left">http 协议或 https</td>
+</tr>
+<tr>
+<td align="left">serviceName=My-Service</td>
+<td align="left">服务名称</td>
+</tr>
+<tr>
+<td align="left"><strong>proxy.port=:8880</strong></td>
+<td align="left">后台输入请求的时候，需要往这个端口上发送</td>
+</tr>
+<tr>
+<td align="left">http.port=:8888</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">rootUrl=’localhost:8888’</td>
+<td align="left">这个是jar包运行时，前端的访问地址</td>
+</tr>
+<tr>
+<td align="left">allowHttpSideEffects=true</td>
+<td align="left">Diffy 考虑到安全性，POST,PUT,DELETE 请求默认忽略，因此该参数为 true 则表示这三种类型请求仍能正常代理发送</td>
+</tr>
+<tr>
+<td align="left">summary.email=”xxx@xx”</td>
+<td align="left">对差异发送到指定邮箱</td>
+</tr>
+<tr>
+<td align="left">responseMode=primary</td>
+<td align="left">代理服务器是否返回结果，默认 (empty) 无返回，可指定 primary 返回线上版本，secondary、candidate</td>
+</tr>
+</tbody></table>
+<p>　</p>
+<h3 id="Diffy-在项目中的应用"><a href="#Diffy-在项目中的应用" class="headerlink" title="Diffy 在项目中的应用"></a><strong>Diffy 在项目中的应用</strong></h3><h5 id="一、项目背景"><a href="#一、项目背景" class="headerlink" title="一、项目背景"></a><strong>一、项目背景</strong></h5><p>　　1、项目要进行服务拆分，拆分的同时会修改代码实现逻辑，但接口的出入参不变，库表信息不变<br>　　2、服务拆分涉及 300+ 个接口的改动，因此回归测试的工作量巨大。通过引流流量，比对拆分前、拆分后接口的差异来发现系统的潜在bug<br>　　3、搭建引流平台，辅助后续版本迭代、服务拆分的回归测试</p>
+<h5 id="二、Diffy-部署方案"><a href="#二、Diffy-部署方案" class="headerlink" title="二、Diffy 部署方案"></a><strong>二、Diffy 部署方案</strong></h5><p><strong>1、目前鲸云现状：</strong><br>测试环境为例，一个应用最多可以有3个版本，即V1(测试环境使用的版本) 、V2(灰发版本) 和  V3(预发环境使用的版本)。<br>Diffy 工具需要将流量广播到不同的版本中，鲸云现状是可以支持的：</p>
+<img src="/blog/e08ca5f7/1627300134.jpg">
+
+<p><strong>2、部署方式：</strong><br>由于 Diffy 需要将流量广播到 primary、secondary 和 candidate 三个版本中，而 Diffy 服务本身也需要部署，因此在鲸云上部署方式如下：</p>
+<img src="/blog/e08ca5f7/1627300196(1).jpg">
+
+<p>　2.1 primary 和 secondary 其实是一样的，所以可以直接部署在V1中。即 diffy 的初始化命令中 [master.primary] 和 [master.secondary] 对应的ip是一致的<br>　2.2 Diffy 服务单独部署在V2的灰发版本中，主要原因是：<br>　　　① 可以通过鲸云的 灰发机制，分配部分流量来进行引流测试，流量比例可以在 0%~100% 之间随意切换；<br>　　　② 用户访问程序时，使用的是8080端口，因此 diffy 服务必须也要是8080端口，即[proxy.port=:8080]<br>　2.3 新服务/候选版本 部署在预发版本中<br>部署后 Difyy 的工作流就如如下：</p>
+<img src="/blog/e08ca5f7/1627300310(1).jpg">
+
+<p><strong>3、报告查看：</strong><br>服务部署后，可以访问<a href="http://localhost:8888来查看" target="_blank" rel="noopener">http://localhost:8888来查看</a> diff 请求对比界面。功能说明如下图所示：</p>
+<img src="/blog/e08ca5f7/1627300467(1).jpg">
+
+<p>某个接口的差异详情：</p>
+<img src="/blog/e08ca5f7/1627300523(1).jpg">
+
+<p>对于可忽略的差异，可点击按钮忽略，通常接口差异主要分为以下几类：<br>　　① 每次调用本身返回值就不同，如 updatetime（可忽略）<br>　　② 测试环境和线上环境数据不一致（可忽略）<br>　　③ 实时数据接口、动态变化数据（可忽略）<br>　　④ 软件缺陷或非预期修改</p>
+
+      
+      
+      <!-- 添加底部版权声明 -->
+      
+    
+      <div class="declare">
+        <strong>本文作者：</strong>
+        
+          鸡肉味·嘎嘣脆
+        
+        <br>
+        <strong>本文链接：</strong>
+        <a href="https://yongwei19.github.io/blog/e08ca5f7.html" title="流量回放工具Diffy介绍及在项目中的应用" target="_blank">https://yongwei19.github.io/blog/e08ca5f7.html</a>
+        <br>
+        <strong>版权声明：</strong>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        进行许可。转载请注明出处！
+        
+          <br>
+          <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+        
+      </div>
+    
+    <!-- 添加底部版权声明结束 -->
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">《软件测试》</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">流量回放</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Diffy</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/读书笔记//" class="article-tag-list-link color5">读书笔记</a>
+        			<a href="/categories/工作记录//" class="article-tag-list-link color5">工作记录</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/专项测试//" class="article-tag-list-link color5">专项测试</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/blog/6d6f351.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">发布管控--全链路质量保障最后关卡要关注的点</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -275,8 +450,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
