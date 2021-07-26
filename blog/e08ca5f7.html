@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627300310(1).jpg">
 <meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627300467(1).jpg">
 <meta property="og:image" content="https://yongwei19.github.io/blog/e08ca5f7/1627300523(1).jpg">
-<meta property="og:updated_time" content="2021-07-26T12:15:38.259Z">
+<meta property="og:updated_time" content="2021-07-26T12:25:35.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="流量回放工具Diffy介绍及在项目中的应用">
 <meta name="twitter:description" content="如何在有限的时间和人力成本投入下，还能有效、高效的保证产品回归测试的质量？今天的主角 Diffy 则提供了较好的解决方案。它基于稳定版本和它副本的输出，对候选版本的输出进行严格对比，以检查候选版本是否正确，大大降低了回归工作量">
@@ -218,7 +218,7 @@
 <p>Diffy需要三个版本的实例，以实现它的噪声过滤和对比功能，它们分别是：<br>　　<strong>1、候选版本(candidate)：</strong>该版本是待测版本，相对于生产环境版本有着更新的代码<br>　　<strong>2、稳定版本(primary)：</strong>该版本通常是已经上线版本，或者是已知功能正常的版本<br>　　<strong>3、稳定版本副本(secondary)：</strong>该版本是稳定版本的副本，和稳定版本运行相同的代码，主要用于排除噪声<br>如上图所示，Diffy能够比较 primary(线上稳定版本) 和 secondary(线上稳定版本备份) 的差异值，通过对这些差异值做减法来确定接口的噪声(比如时间戳、随机ID等)；<br>通过比较 candidate(测试版本) 和 primary(线上稳定版本) 得到基本的 diff 结果；最后通过比对<strong>【基本的 diff 结果】与【消除噪声后的结果】</strong>，得到最终的diff结果</p>
 <p>其中：<br>　　<strong>原始区别：</strong>为候选版本 和 稳定版本之间输出的区别，其中可能会包含噪声<br>　　<strong>噪声：</strong>从稳定版本 和 其副本中获得，如果两个运行相同代码的系统输入相同输出却不同，则 Diffy 会认为这是开发人员不需要关心的噪声(比如时间戳、随机ID等)<br>　　基于上述两个区别集合，Diffy可以识别出 候选版本 和 稳定版本 真实的区别，这些区别很有可能就是一个缺陷</p>
 <p>当然，对于一个概率性出现随机值，仅仅一次请求的结论可能是不准确的。例如：<br>对于一个 50% 概率出现true或者false的布尔值，则有50%的概率会出现候选版本和稳定版本的不同，同时又会有50%的概率出现稳定版本和其副本出现不同（即将这个值认定为噪声），最终会有25%的概率认为这是一个缺陷。因为此时稳定版本和其副本值相同，候选版本和稳定版本值不同。因此，Diffy还会聚合原始区别和噪声，当发现二者出现的概率类似的时候，会认定之前识别出来的缺陷属于误报</p>
-<h5 id="四、Diffy-的安装与部署"><a href="#四、Diffy-的安装与部署" class="headerlink" title="四、Diffy 的安装与部署"></a><strong>四、Diffy 的安装与部署</strong></h5><p><strong>1、拉取代码并构建</strong><br>　前3个部分简单介绍了 Diffy 的作用和原理，了解了 Diffy介绍 的作用和原理后，可以将 Diffy 工具的源码拉到服务器中：</p>
+<h5 id="四、Diffy-的安装与部署"><a href="#四、Diffy-的安装与部署" class="headerlink" title="四、Diffy 的安装与部署"></a><strong>四、Diffy 的安装与部署</strong></h5><p><strong>1、拉取代码并构建</strong><br>　前3个部分简单介绍了 Diffy 的作用和原理，了解了 Diffy 介绍 的作用和原理后，可以将 Diffy 工具的源码拉到服务器中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/twitter/diffy.git</span><br></pre></td></tr></table></figure>
 
 <p>代码拉取完成后，进入到 diffy 目录后，使用 ./sbt assembly 进行构建。但需要注意，windows下会构建失败<br>构建完成后，在 diffy/target/scala-xx/diffy-server.jar 下就能找到可执行jar包<br>其实构建的目的就是为了获取可执行的jar包，我这里已经有构建好的，可以直接下载并上传服务器即可直接使用：<a href="https://store-g1.seewo.com/seewoedu_pub_170b869943814fd89eda9cbc7f817ec7()下载后修改一下文件名" target="_blank" rel="noopener">diffy-server.jar</a></p>
@@ -290,7 +290,7 @@
 <p><strong>2、部署方式：</strong><br>由于 Diffy 需要将流量广播到 primary、secondary 和 candidate 三个版本中，而 Diffy 服务本身也需要部署，因此在鲸云上部署方式如下：</p>
 <img src="/blog/e08ca5f7/1627300196(1).jpg">
 
-<p>　2.1 primary 和 secondary 其实是一样的，所以可以直接部署在V1中。即 diffy 的初始化命令中 [master.primary] 和 [master.secondary] 对应的ip是一致的<br>　2.2 Diffy 服务单独部署在V2的灰发版本中，主要原因是：<br>　　　① 可以通过鲸云的 灰发机制，分配部分流量来进行引流测试，流量比例可以在 0%~100% 之间随意切换；<br>　　　② 用户访问程序时，使用的是8080端口，因此 diffy 服务必须也要是8080端口，即[proxy.port=:8080]<br>　2.3 新服务/候选版本 部署在预发版本中<br>部署后 Difyy 的工作流就如如下：</p>
+<p>　2.1 primary 和 secondary 其实是一样的，所以可以直接部署在V1中。即 diffy 的初始化命令中 [master.primary] 和 [master.secondary] 对应的ip是一致的<br>　2.2 Diffy 服务单独部署在V2的灰发版本中，主要原因是：<br>　　　① 可以通过鲸云的 灰发机制，分配部分流量来进行引流测试，流量比例可以在 0%~100% 之间随意切换；<br>　　　② 用户访问程序时，使用的是8080端口，因此 Diffy 服务必须也要是8080端口，即[proxy.port=:8080]<br>　2.3 新服务/候选版本 部署在预发版本中<br>部署后 Diffy 的工作流就如如下：</p>
 <img src="/blog/e08ca5f7/1627300310(1).jpg">
 
 <p><strong>3、报告查看：</strong><br>服务部署后，可以访问<a href="http://localhost:8888来查看" target="_blank" rel="noopener">http://localhost:8888来查看</a> diff 请求对比界面。功能说明如下图所示：</p>
@@ -532,15 +532,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AB测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">《性能测试30讲》</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">《软件测试》</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AB测试</a>
               </li>
              
               <li class="article-tag-list-item">
